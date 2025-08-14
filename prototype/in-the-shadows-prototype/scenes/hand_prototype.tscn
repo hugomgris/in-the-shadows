@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://fbssp3g71kmt"]
+
+[ext_resource type="PackedScene" uid="uid://3nttd6ptwbfm" path="res://assets/BasicHand_export_2.glb" id="1_w5klm"]
+[ext_resource type="Script" uid="uid://dtvd241txq7rv" path="res://scripts/skeletonRigPrototype.gd" id="2_qdvxo"]
+
+[node name="Hand" instance=ExtResource("1_w5klm")]
+
+[node name="Skeleton3D" parent="Armature_001" index="0"]
+script = ExtResource("2_qdvxo")
