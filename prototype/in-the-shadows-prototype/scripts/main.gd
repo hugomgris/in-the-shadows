@@ -13,7 +13,7 @@ var mid_to_tip_ratio: float = 0.8   # Tip phalange rotates 80% of middle rotatio
 var camera: Camera3D
 var camera_pivot: Node3D
 var camera_distance: float = 5.0
-var camera_height: float = 7.0
+var camera_height: float = 4.0
 var rotation_speed: float = 2.0
 var zoom_speed: float = 0.5
 var pan_speed: float = 0.01
@@ -103,6 +103,10 @@ func handle_finger_controls(event):
 			index_base_bone_id = skeleton.find_bone("Bone.018")
 			index_mid_bone_id = skeleton.find_bone("Bone.019")
 			index_tip_bone_id = skeleton.find_bone("Bone.0201")
+		elif event.keycode == KEY_6:
+			index_base_bone_id = skeleton.find_bone("Bone.001")
+			index_mid_bone_id = -1
+			index_tip_bone_id = -1
 	
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:

@@ -20,5 +20,8 @@ script = ExtResource("1_0wfyh")
 
 [node name="Hand" parent="." instance=ExtResource("1_o5qli")]
 
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.846676, 0.050057, -0.529749, 0, 0.995565, 0.0940728, 0.532109, 0.0796492, -0.842922, -1.88626, 5.02408, -3.98927)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_tefeu")
