@@ -83,30 +83,31 @@ func _input(event):
 
 func handle_finger_controls(event):
 	if event is InputEventKey:
-		if event.keycode == KEY_1:
-			index_base_bone_id = skeleton.find_bone("Bone.007")
-			index_mid_bone_id = skeleton.find_bone("Bone.008")
-			index_tip_bone_id = -1
-		elif event.keycode == KEY_2:
-			index_base_bone_id = skeleton.find_bone("Bone.009")
-			index_mid_bone_id = skeleton.find_bone("Bone.010")
-			index_tip_bone_id = skeleton.find_bone("Bone.011")
-		elif event.keycode == KEY_3:
-			index_base_bone_id = skeleton.find_bone("Bone.012")
-			index_mid_bone_id = skeleton.find_bone("Bone.013")
-			index_tip_bone_id = skeleton.find_bone("Bone.014")
-		elif event.keycode == KEY_4:
-			index_base_bone_id = skeleton.find_bone("Bone.015")
-			index_mid_bone_id = skeleton.find_bone("Bone.016")
-			index_tip_bone_id = skeleton.find_bone("Bone.017")
-		elif event.keycode == KEY_5:
-			index_base_bone_id = skeleton.find_bone("Bone.018")
-			index_mid_bone_id = skeleton.find_bone("Bone.019")
-			index_tip_bone_id = skeleton.find_bone("Bone.0201")
-		elif event.keycode == KEY_6:
-			index_base_bone_id = skeleton.find_bone("Bone.001")
-			index_mid_bone_id = -1
-			index_tip_bone_id = -1
+		match event.keycode:
+			KEY_1:
+				index_base_bone_id = skeleton.find_bone("Bone.007")
+				index_mid_bone_id = skeleton.find_bone("Bone.008")
+				index_tip_bone_id = -1
+			KEY_2:
+				index_base_bone_id = skeleton.find_bone("Bone.009")
+				index_mid_bone_id = skeleton.find_bone("Bone.010")
+				index_tip_bone_id = skeleton.find_bone("Bone.011")
+			KEY_3:
+				index_base_bone_id = skeleton.find_bone("Bone.012")
+				index_mid_bone_id = skeleton.find_bone("Bone.013")
+				index_tip_bone_id = skeleton.find_bone("Bone.014")
+			KEY_4:
+				index_base_bone_id = skeleton.find_bone("Bone.015")
+				index_mid_bone_id = skeleton.find_bone("Bone.016")
+				index_tip_bone_id = skeleton.find_bone("Bone.017")
+			KEY_5:
+				index_base_bone_id = skeleton.find_bone("Bone.018")
+				index_mid_bone_id = skeleton.find_bone("Bone.019")
+				index_tip_bone_id = skeleton.find_bone("Bone.0201")
+			KEY_6:
+				index_base_bone_id = skeleton.find_bone("Bone.001")
+				index_mid_bone_id = -1
+				index_tip_bone_id = -1
 	
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
