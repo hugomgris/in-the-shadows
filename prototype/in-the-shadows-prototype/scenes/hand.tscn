@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqiwu3dwtqcrw"]
+[gd_scene load_steps=13 format=3 uid="uid://dqiwu3dwtqcrw"]
 
 [ext_resource type="PackedScene" uid="uid://bqksggtpj7hla" path="res://assets/BasiscHand_02.glb" id="1_eyfoh"]
-[ext_resource type="Script" uid="uid://dicmteqrovicw" path="res://scripts/boneController.gd" id="2_cmdsa"]
+[ext_resource type="Script" uid="uid://dicmteqrovicw" path="res://scripts/BoneController.gd" id="2_cmdsa"]
+[ext_resource type="Script" uid="uid://bq4mkfbx70jeg" path="res://scripts/AnimationHandler.gd" id="3_k7pjy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cmdsa"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -21,6 +22,26 @@ glow_enabled = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_eyfoh"]
 
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_k7pjy"]
+filter_enabled = true
+filters = ["Armature_001/Skeleton3D:Bone.011"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m1v21"]
+animation = &"Hand_Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kdemd"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_k7pjy"]
+graph_offset = Vector2(-491.575, 11.5961)
+nodes/BlendManualControl/node = SubResource("AnimationNodeBlend2_k7pjy")
+nodes/BlendManualControl/position = Vector2(-60, 140)
+nodes/IddleState/node = SubResource("AnimationNodeAnimation_m1v21")
+nodes/IddleState/position = Vector2(-360, 100)
+nodes/ManualState/node = SubResource("AnimationNodeAnimation_kdemd")
+nodes/ManualState/position = Vector2(-360, 320)
+nodes/output/position = Vector2(600, 140)
+node_connections = [&"BlendManualControl", 0, &"IddleState", &"BlendManualControl", 1, &"ManualState", &"output", 0, &"BlendManualControl"]
+
 [node name="Hand" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -28,91 +49,28 @@ environment = SubResource("Environment_k7pjy")
 
 [node name="BasiscHand_02" parent="." instance=ExtResource("1_eyfoh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.72066, 0, -2.36577)
+script = ExtResource("3_k7pjy")
 
 [node name="IndexFingerAttachment" type="BoneAttachment3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="2"]
 transform = Transform3D(0.958716, 0.284365, 3.7014e-07, -0.284365, 0.958716, -2.21976e-07, -4.22218e-07, 1.21843e-07, 1, 1.06387, 5.70075, -2.43796e-06)
-visible = false
 bone_name = "Bone.011"
 bone_idx = 8
 
-[node name="index_tip" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="3"]
-transform = Transform3D(0.958716, 0.284365, 3.7014e-07, -0.284365, 0.958716, -2.21976e-07, -4.22218e-07, 1.21843e-07, 1, 1.21008, 6.1132, 0.00285339)
+[node name="index_tip" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D/IndexFingerAttachment"]
+transform = Transform3D(0.983478, 0.0754804, -0.164537, -0.0809899, 0.996348, -0.0270279, 0.161896, 0.0399072, 0.986, -0.0153584, 0.574852, 0.0631661)
 script = ExtResource("2_cmdsa")
-bone_name = "Bone.011"
-skeleton_path = NodePath("..")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/index_tip"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/IndexFingerAttachment/index_tip"]
 transform = Transform3D(0.55, -9.31323e-10, 0, 9.31323e-10, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
-visible = false
 mesh = SubResource("SphereMesh_eyfoh")
-skeleton = NodePath("../../IndexFingerAttachment")
+skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/index_tip"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/IndexFingerAttachment/index_tip"]
 transform = Transform3D(0.5, -9.31323e-10, 0, 9.31323e-10, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("SphereShape3D_eyfoh")
 
-[node name="middle_tip" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="4"]
-transform = Transform3D(0.958716, 0.284365, 3.7014e-07, -0.284365, 0.958717, -2.21976e-07, -4.22218e-07, 1.21843e-07, 1, 0.0535252, 6.53505, 0.00285292)
-script = ExtResource("2_cmdsa")
-skeleton_path = NodePath("..")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/middle_tip"]
-transform = Transform3D(0.55, -9.31323e-10, 0, 9.31323e-10, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
-visible = false
-mesh = SubResource("SphereMesh_eyfoh")
-skeleton = NodePath("../../IndexFingerAttachment")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/middle_tip"]
-transform = Transform3D(0.5, -9.31323e-10, 0, 9.31323e-10, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-shape = SubResource("SphereShape3D_eyfoh")
-
-[node name="ring_tip" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="5"]
-transform = Transform3D(0.958716, 0.284365, 3.7014e-07, -0.284365, 0.958717, -2.21976e-07, -4.22218e-07, 1.21843e-07, 1, -1.03247, 5.96332, 0.00285292)
-script = ExtResource("2_cmdsa")
-bone_name = "Bone.017"
-skeleton_path = NodePath("..")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/ring_tip"]
-transform = Transform3D(0.55, -9.31323e-10, 0, 9.31323e-10, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
-visible = false
-mesh = SubResource("SphereMesh_eyfoh")
-skeleton = NodePath("../../IndexFingerAttachment")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/ring_tip"]
-transform = Transform3D(0.5, -9.31323e-10, 0, 9.31323e-10, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-shape = SubResource("SphereShape3D_eyfoh")
-
-[node name="little_tip" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="6"]
-transform = Transform3D(0.958716, 0.284365, 3.7014e-07, -0.284365, 0.958717, -2.21976e-07, -4.22218e-07, 1.21843e-07, 1, -1.6433, 5.18123, 0.00285292)
-script = ExtResource("2_cmdsa")
-bone_name = "Bone.020"
-skeleton_path = NodePath("..")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/little_tip"]
-transform = Transform3D(0.55, -9.31323e-10, 0, 9.31323e-10, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
-visible = false
-mesh = SubResource("SphereMesh_eyfoh")
-skeleton = NodePath("../../IndexFingerAttachment")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/little_tip"]
-transform = Transform3D(0.5, -9.31323e-10, 0, 9.31323e-10, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-shape = SubResource("SphereShape3D_eyfoh")
-
-[node name="thumb_tip" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="7"]
-transform = Transform3D(0.958716, 0.284365, 3.7014e-07, -0.284365, 0.958717, -2.21976e-07, -4.22218e-07, 1.21843e-07, 1, 1.89997, 4.05101, 0.00285292)
-script = ExtResource("2_cmdsa")
-bone_name = "Bone.008"
-skeleton_path = NodePath("..")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/thumb_tip"]
-transform = Transform3D(0.55, -9.31323e-10, 0, 9.31323e-10, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
-visible = false
-mesh = SubResource("SphereMesh_eyfoh")
-skeleton = NodePath("../../IndexFingerAttachment")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/thumb_tip"]
-transform = Transform3D(0.5, -9.31323e-10, 0, 9.31323e-10, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-shape = SubResource("SphereShape3D_eyfoh")
+[node name="AnimationPlayer" parent="BasiscHand_02" index="2"]
+playback_auto_capture = false
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(-0.971904, 0.00762872, 0.235252, -0.0348905, 0.983764, -0.176046, -0.232775, -0.179308, -0.955858, 10.3149, 0.740853, -2.29744)
@@ -124,9 +82,15 @@ spot_range = 85.846
 spot_angle = 45.48
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.740805, 0, -0.671721, 0, 1, 0, 0.671721, 0, -0.740805, 1.5969, 3.31668, 3.59146)
+transform = Transform3D(-0.740805, 0, -0.671721, 0, 1, 0, 0.671721, 0, -0.740805, 1.5969, 2.88086, 3.59146)
 projection = 1
 current = true
 size = 6.61
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../BasiscHand_02")
+tree_root = SubResource("AnimationNodeBlendTree_k7pjy")
+anim_player = NodePath("../BasiscHand_02/AnimationPlayer")
+parameters/BlendManualControl/blend_amount = -3.07
 
 [editable path="BasiscHand_02"]

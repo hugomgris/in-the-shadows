@@ -1,7 +1,7 @@
 extends Area3D
 
 # Bone Configuration
-@export var bone_name: String = "Bone.014"  # Set this in the inspector for each bone
+@export var bone_name: String = "Bone.011"  # Set this in the inspector for each bone
 @export var skeleton_path: NodePath = "../.."  # Path to skeleton from this node
 
 # Movement Parameters
