@@ -1,24 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://8p5wvana873i"]
+[gd_scene load_steps=5 format=3 uid="uid://8p5wvana873i"]
 
 [ext_resource type="Script" uid="uid://1r20oaewmm7j" path="res://scripts/main.gd" id="1_0wfyh"]
-[ext_resource type="PackedScene" uid="uid://3nttd6ptwbfm" path="res://assets/BasicHand_export_2.glb" id="1_o5qli"]
-[ext_resource type="Texture2D" uid="uid://crs1ky0jyr0og" path="res://hdris/bambanani_sunset_4k.exr" id="3_sugp2"]
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jyhfs"]
-panorama = ExtResource("3_sugp2")
-
-[sub_resource type="Sky" id="Sky_tbgi4"]
-resource_local_to_scene = true
-sky_material = SubResource("PanoramaSkyMaterial_jyhfs")
-
-[sub_resource type="Environment" id="Environment_tefeu"]
-sky = SubResource("Sky_tbgi4")
-ambient_light_source = 3
+[ext_resource type="PackedScene" uid="uid://dqiwu3dwtqcrw" path="res://scenes/hand.tscn" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://c473se0128rlk" path="res://scripts/HandController.gd" id="3_jyhfs"]
+[ext_resource type="Script" uid="uid://j6jfn3kc43if" path="res://scripts/GameManager.gd" id="3_sugp2"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_0wfyh")
 
-[node name="Hand" parent="." instance=ExtResource("1_o5qli")]
+[node name="Hand" parent="." instance=ExtResource("2_0wfyh")]
+script = ExtResource("3_jyhfs")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_tefeu")
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("3_sugp2")

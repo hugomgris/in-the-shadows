@@ -4,6 +4,14 @@
 [ext_resource type="Script" uid="uid://dtvd241txq7rv" path="res://scripts/skeletonRigPrototype.gd" id="2_qdvxo"]
 
 [node name="Hand" instance=ExtResource("1_w5klm")]
+transform = Transform3D(0.999989, 0.00422712, 0.00216158, -0.00423231, 0.999988, 0.0024029, -0.00215138, -0.00241203, 0.999995, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Armature_001" index="0"]
+transform = Transform3D(0.999999, -0.000651333, -0.00122412, 0.000650943, 1, -0.000317718, 0.00122433, 0.000316912, 0.999999, 0, 0, 0)
+bones/5/rotation = Quaternion(0, 0, -0.145, 0.98)
+bones/7/rotation = Quaternion(1.21, 0, 0.017, 1)
+bones/8/rotation = Quaternion(1.74, 0, 0.012, 1)
+bones/9/rotation = Quaternion(0, 0, -0.004, 1)
+bones/13/rotation = Quaternion(0, 0, 0.075, 0.989)
+bones/14/rotation = Quaternion(-0.04, 0, 0.017, 1)
 script = ExtResource("2_qdvxo")
