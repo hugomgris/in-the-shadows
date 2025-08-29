@@ -1,8 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://dqiwu3dwtqcrw"]
+[gd_scene load_steps=20 format=3 uid="uid://dqiwu3dwtqcrw"]
 
 [ext_resource type="PackedScene" uid="uid://bqksggtpj7hla" path="res://assets/BasiscHand_02.glb" id="1_eyfoh"]
-[ext_resource type="Script" uid="uid://dicmteqrovicw" path="res://scripts/BoneController.gd" id="2_cmdsa"]
+[ext_resource type="Script" uid="uid://dicmteqrovicw" path="res://scripts/boneController.gd" id="2_cmdsa"]
 [ext_resource type="Script" uid="uid://bq4mkfbx70jeg" path="res://scripts/AnimationHandler.gd" id="3_k7pjy"]
+[ext_resource type="Shader" uid="uid://bex80yesxkb7p" path="res://shaders/hand.gdshader" id="3_m1v21"]
+[ext_resource type="Texture2D" uid="uid://bcedkkbrsj431" path="res://shaders/color_gradient.tres" id="4_n04oe"]
+[ext_resource type="Texture2D" uid="uid://did3p25l52we" path="res://shaders/fresnel_gradient.tres" id="5_yinqy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cmdsa"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -18,9 +21,37 @@ sky = SubResource("Sky_sugp2")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kdemd"]
+render_priority = 0
+shader = ExtResource("3_m1v21")
+shader_parameter/albedo = Color(0.82413, 0.601306, 0.321885, 1)
+shader_parameter/color_gradient = ExtResource("4_n04oe")
+shader_parameter/fresnel_gradient = ExtResource("5_yinqy")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yinqy"]
+render_priority = 0
+shader = ExtResource("3_m1v21")
+shader_parameter/albedo = Color(0.176702, 0.47874, 0.734602, 1)
+shader_parameter/color_gradient = ExtResource("4_n04oe")
+shader_parameter/fresnel_gradient = ExtResource("5_yinqy")
+
 [sub_resource type="SphereMesh" id="SphereMesh_eyfoh"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n04oe"]
+render_priority = 0
+shader = ExtResource("3_m1v21")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/color_gradient = ExtResource("4_n04oe")
+shader_parameter/fresnel_gradient = ExtResource("5_yinqy")
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_eyfoh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ligq1"]
+render_priority = 0
+shader = ExtResource("3_m1v21")
+shader_parameter/albedo = Color(0.721372, 0.300384, 0.632201, 1)
+shader_parameter/color_gradient = ExtResource("4_n04oe")
+shader_parameter/fresnel_gradient = ExtResource("5_yinqy")
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_k7pjy"]
 filter_enabled = true
@@ -32,7 +63,6 @@ animation = &"Hand_Idle"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kdemd"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_k7pjy"]
-graph_offset = Vector2(-491.575, 11.5961)
 nodes/BlendManualControl/node = SubResource("AnimationNodeBlend2_k7pjy")
 nodes/BlendManualControl/position = Vector2(-60, 140)
 nodes/IddleState/node = SubResource("AnimationNodeAnimation_m1v21")
@@ -51,38 +81,68 @@ environment = SubResource("Environment_k7pjy")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.72066, 0, -2.36577)
 script = ExtResource("3_k7pjy")
 
+[node name="Skeleton3D" parent="BasiscHand_02/Armature_001" index="0"]
+bones/0/position = Vector3(0.0285662, -0.41286, -0.198241)
+bones/0/rotation = Quaternion(0.0423539, 0.0846375, 0.0413592, 0.994652)
+bones/1/rotation = Quaternion(-0.0348942, -4.42863e-08, -0.0050282, 0.999378)
+bones/3/rotation = Quaternion(3.75768e-09, 1.75778e-07, -0.0586966, 0.998276)
+bones/4/rotation = Quaternion(1.71161e-09, 5.11257e-08, 0.00395536, 0.999992)
+bones/5/rotation = Quaternion(7.32322e-08, 4.31856e-08, -0.199614, 0.979875)
+bones/6/rotation = Quaternion(-4.32899e-09, 6.43106e-08, 0.0276911, 0.999617)
+bones/7/rotation = Quaternion(2.64111e-09, 2.24335e-08, 0.0173437, 0.99985)
+bones/8/rotation = Quaternion(2.29031e-09, 2.97672e-08, 0.0117527, 0.999931)
+bones/9/rotation = Quaternion(6.65432e-08, -1.80591e-08, -0.00934457, 0.999956)
+bones/10/rotation = Quaternion(8.98673e-10, 6.31261e-08, -0.00772176, 0.99997)
+bones/11/rotation = Quaternion(-3.1586e-09, -1.34721e-08, 0.0143338, 0.999897)
+bones/12/rotation = Quaternion(-3.76498e-09, -4.71804e-08, -0.00236965, 0.999997)
+bones/13/rotation = Quaternion(7.13536e-08, -5.02767e-08, 0.150422, 0.988622)
+bones/14/rotation = Quaternion(3.41527e-09, -7.5302e-08, 0.0165903, 0.999862)
+bones/15/rotation = Quaternion(-4.92808e-09, 1.64279e-08, 0.0141098, 0.9999)
+bones/16/rotation = Quaternion(-7.17692e-09, -2.66882e-08, 0.00346531, 0.999994)
+bones/17/rotation = Quaternion(8.66728e-08, -1.01106e-07, 0.32958, 0.944128)
+bones/18/rotation = Quaternion(-3.25645e-09, 1.26019e-07, -0.0400048, 0.9992)
+bones/19/rotation = Quaternion(-2.97568e-09, -1.68339e-07, -0.0248408, 0.999691)
+bones/20/rotation = Quaternion(-6.43069e-09, 8.74e-08, 0.0287225, 0.999587)
+
+[node name="Hand_01_001" parent="BasiscHand_02/Armature_001/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_kdemd")
+
+[node name="Sleeve_002" parent="BasiscHand_02/Armature_001/Skeleton3D" index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_yinqy")
+
 [node name="IndexFingerAttachment" type="BoneAttachment3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="2"]
-transform = Transform3D(0.958716, 0.284365, 3.7014e-07, -0.284365, 0.958716, -2.21976e-07, -4.22218e-07, 1.21843e-07, 1, 1.06387, 5.70075, -2.43796e-06)
-bone_name = "Bone.011"
-bone_idx = 8
+transform = Transform3D(0.950745, 0.26142, 0.166561, -0.263849, 0.964533, -0.00777813, -0.162687, -0.0365519, 0.986, 0.267558, 4.42226, 0.000583768)
+bone_name = "Bone.009"
+bone_idx = 6
 
 [node name="index_tip" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D/IndexFingerAttachment"]
-transform = Transform3D(0.983478, 0.0754804, -0.164537, -0.0809899, 0.996348, -0.0270279, 0.161896, 0.0399072, 0.986, -0.0153584, 0.574852, 0.0631661)
+transform = Transform3D(1, 1.86265e-09, 0, -1.86265e-09, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("2_cmdsa")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/IndexFingerAttachment/index_tip"]
-transform = Transform3D(0.55, -9.31323e-10, 0, 9.31323e-10, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
+visible = false
 mesh = SubResource("SphereMesh_eyfoh")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../../../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_n04oe")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/IndexFingerAttachment/index_tip"]
-transform = Transform3D(0.5, -9.31323e-10, 0, 9.31323e-10, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("SphereShape3D_eyfoh")
 
-[node name="AnimationPlayer" parent="BasiscHand_02" index="2"]
-playback_auto_capture = false
+[node name="Cube" parent="BasiscHand_02" index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_ligq1")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(-0.971904, 0.00762872, 0.235252, -0.0348905, 0.983764, -0.176046, -0.232775, -0.179308, -0.955858, 10.3149, 0.740853, -2.29744)
+transform = Transform3D(-0.971905, 0.00762874, 0.235252, -0.0348905, 0.983763, -0.176046, -0.232775, -0.179308, -0.955858, 8.80383, 2.65186, -4.64264)
 light_energy = 5.894
 shadow_enabled = true
 shadow_bias = 0.05
 shadow_normal_bias = 0.8
-spot_range = 85.846
+spot_range = 4096.0
+spot_attenuation = 0.26
 spot_angle = 45.48
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.740805, 0, -0.671721, 0, 1, 0, 0.671721, 0, -0.740805, 1.5969, 2.88086, 3.59146)
+transform = Transform3D(-0.740805, 0, -0.671721, 0, 1, 0, 0.671721, 0, -0.740805, 1.54386, 2.11708, 3.63185)
 projection = 1
 current = true
 size = 6.61
