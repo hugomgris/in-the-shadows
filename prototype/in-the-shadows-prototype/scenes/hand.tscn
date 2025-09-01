@@ -1,11 +1,12 @@
-[gd_scene load_steps=20 format=3 uid="uid://dqiwu3dwtqcrw"]
+[gd_scene load_steps=30 format=3 uid="uid://dqiwu3dwtqcrw"]
 
 [ext_resource type="PackedScene" uid="uid://bqksggtpj7hla" path="res://assets/BasiscHand_02.glb" id="1_eyfoh"]
-[ext_resource type="Script" uid="uid://dicmteqrovicw" path="res://scripts/boneController.gd" id="2_cmdsa"]
 [ext_resource type="Script" uid="uid://bq4mkfbx70jeg" path="res://scripts/AnimationHandler.gd" id="3_k7pjy"]
 [ext_resource type="Shader" uid="uid://bex80yesxkb7p" path="res://shaders/hand.gdshader" id="3_m1v21"]
+[ext_resource type="Script" uid="uid://diwkkyi5cadwe" path="res://scripts/SkeletonController.gd" id="3_yinqy"]
 [ext_resource type="Texture2D" uid="uid://bcedkkbrsj431" path="res://shaders/color_gradient.tres" id="4_n04oe"]
 [ext_resource type="Texture2D" uid="uid://did3p25l52we" path="res://shaders/fresnel_gradient.tres" id="5_yinqy"]
+[ext_resource type="Script" uid="uid://d3shngd83dbcb" path="res://scripts/BoneCollider.gd" id="7_ligq1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cmdsa"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -35,16 +36,29 @@ shader_parameter/albedo = Color(0.176702, 0.47874, 0.734602, 1)
 shader_parameter/color_gradient = ExtResource("4_n04oe")
 shader_parameter/fresnel_gradient = ExtResource("5_yinqy")
 
-[sub_resource type="SphereMesh" id="SphereMesh_eyfoh"]
+[sub_resource type="SphereMesh" id="SphereMesh_yinqy"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_n04oe"]
-render_priority = 0
-shader = ExtResource("3_m1v21")
-shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/color_gradient = ExtResource("4_n04oe")
-shader_parameter/fresnel_gradient = ExtResource("5_yinqy")
+[sub_resource type="SphereShape3D" id="SphereShape3D_ligq1"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_eyfoh"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_n04oe"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yinqy"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_y1wyv"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_v24qn"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_yinqy"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ligq1"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ligq1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y1wyv"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_v24qn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bfalx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ligq1"]
 render_priority = 0
@@ -82,27 +96,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.72066, 0, -2.36577)
 script = ExtResource("3_k7pjy")
 
 [node name="Skeleton3D" parent="BasiscHand_02/Armature_001" index="0"]
+transform = Transform3D(1.16098, 1.86265e-09, 0, -1.86265e-09, 1.16098, 0, 0, 0, 1.16098, 0, 0, 0)
 bones/0/position = Vector3(0.0285662, -0.41286, -0.198241)
 bones/0/rotation = Quaternion(0.0423539, 0.0846375, 0.0413592, 0.994652)
-bones/1/rotation = Quaternion(-0.0348942, -4.42863e-08, -0.0050282, 0.999378)
-bones/3/rotation = Quaternion(3.75768e-09, 1.75778e-07, -0.0586966, 0.998276)
-bones/4/rotation = Quaternion(1.71161e-09, 5.11257e-08, 0.00395536, 0.999992)
-bones/5/rotation = Quaternion(7.32322e-08, 4.31856e-08, -0.199614, 0.979875)
-bones/6/rotation = Quaternion(-4.32899e-09, 6.43106e-08, 0.0276911, 0.999617)
-bones/7/rotation = Quaternion(2.64111e-09, 2.24335e-08, 0.0173437, 0.99985)
-bones/8/rotation = Quaternion(2.29031e-09, 2.97672e-08, 0.0117527, 0.999931)
 bones/9/rotation = Quaternion(6.65432e-08, -1.80591e-08, -0.00934457, 0.999956)
-bones/10/rotation = Quaternion(8.98673e-10, 6.31261e-08, -0.00772176, 0.99997)
-bones/11/rotation = Quaternion(-3.1586e-09, -1.34721e-08, 0.0143338, 0.999897)
-bones/12/rotation = Quaternion(-3.76498e-09, -4.71804e-08, -0.00236965, 0.999997)
 bones/13/rotation = Quaternion(7.13536e-08, -5.02767e-08, 0.150422, 0.988622)
-bones/14/rotation = Quaternion(3.41527e-09, -7.5302e-08, 0.0165903, 0.999862)
-bones/15/rotation = Quaternion(-4.92808e-09, 1.64279e-08, 0.0141098, 0.9999)
-bones/16/rotation = Quaternion(-7.17692e-09, -2.66882e-08, 0.00346531, 0.999994)
 bones/17/rotation = Quaternion(8.66728e-08, -1.01106e-07, 0.32958, 0.944128)
-bones/18/rotation = Quaternion(-3.25645e-09, 1.26019e-07, -0.0400048, 0.9992)
-bones/19/rotation = Quaternion(-2.97568e-09, -1.68339e-07, -0.0248408, 0.999691)
-bones/20/rotation = Quaternion(-6.43069e-09, 8.74e-08, 0.0287225, 0.999587)
+script = ExtResource("3_yinqy")
 
 [node name="Hand_01_001" parent="BasiscHand_02/Armature_001/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("ShaderMaterial_kdemd")
@@ -110,23 +110,278 @@ surface_material_override/0 = SubResource("ShaderMaterial_kdemd")
 [node name="Sleeve_002" parent="BasiscHand_02/Armature_001/Skeleton3D" index="1"]
 surface_material_override/0 = SubResource("ShaderMaterial_yinqy")
 
-[node name="IndexFingerAttachment" type="BoneAttachment3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="2"]
-transform = Transform3D(0.950745, 0.26142, 0.166561, -0.263849, 0.964533, -0.00777813, -0.162687, -0.0365519, 0.986, 0.267558, 4.42226, 0.000583768)
+[node name="wrist_attachment" type="BoneAttachment3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="2"]
+transform = Transform3D(0.983017, -0.0770354, 0.166561, 0.0794341, 0.99681, -0.00777792, -0.16543, 0.0208765, 0.986, -0.184914, 2.40958, 0.0611417)
+bone_name = "Bone.001"
+bone_idx = 1
+
+[node name="wrist" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D/wrist_attachment"]
+transform = Transform3D(1, -7.68341e-09, -1.49012e-08, 9.77889e-09, 1, 0, 0, 0, 1, 0.000504732, 0.00605488, 0.000658035)
+script = ExtResource("7_ligq1")
+bone_name = "Bone.001"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/wrist_attachment/wrist"]
+transform = Transform3D(1.83369, -6.14673e-08, -8.9407e-08, -2.55182e-07, 1.83369, -2.23517e-08, 3.27826e-07, 1.19209e-07, 1.83369, 0.116025, 0.968525, 0.0185747)
+visible = false
+mesh = SubResource("SphereMesh_yinqy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/wrist_attachment/wrist"]
+transform = Transform3D(1.83369, -6.14673e-08, -8.9407e-08, -2.55182e-07, 1.83369, -2.23517e-08, 3.27826e-07, 1.19209e-07, 1.83369, 0.119413, 0.968098, -0.00161648)
+shape = SubResource("SphereShape3D_ligq1")
+
+[node name="thumb_base_attachment" type="BoneAttachment3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="3"]
+transform = Transform3D(0.524984, 0.834655, 0.166561, -0.845753, 0.533517, -0.00777822, -0.0953553, -0.136786, 0.986, 0.764367, 3.7431, -0.0886962)
+bone_name = "Bone.007"
+bone_idx = 3
+
+[node name="index_base" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D/thumb_base_attachment"]
+script = ExtResource("7_ligq1")
+bone_name = "Bone.007"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/thumb_base_attachment/index_base"]
+transform = Transform3D(0.653253, -2.6077e-08, -5.21541e-08, -1.18278e-07, 0.653252, -1.49012e-08, 2.98023e-08, 4.47035e-08, 0.653253, 0.031179, 0.0717974, -0.0195651)
+visible = false
+mesh = SubResource("CapsuleMesh_n04oe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/thumb_base_attachment/index_base"]
+transform = Transform3D(0.653253, -2.6077e-08, -5.21541e-08, -1.18278e-07, 0.653252, -1.49012e-08, 2.98023e-08, 4.47035e-08, 0.653253, 0.031179, 0.0717974, -0.0195651)
+shape = SubResource("CapsuleShape3D_yinqy")
+
+[node name="thumb_tip_attachment" type="BoneAttachment3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="4"]
+transform = Transform3D(0.531571, 0.830476, 0.166561, -0.841506, 0.540191, -0.00777831, -0.0964345, -0.136027, 0.986, 1.13949, 3.98288, -0.150173)
+bone_name = "Bone.008"
+bone_idx = 4
+
+[node name="thumb_tip" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D/thumb_tip_attachment"]
+transform = Transform3D(1, 1.86265e-08, 7.45058e-09, 4.65661e-08, 1, 0, -7.45058e-09, 0, 1, 0, 0, 0)
+script = ExtResource("7_ligq1")
+bone_name = "Bone.008"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/thumb_tip_attachment/thumb_tip"]
+transform = Transform3D(0.570342, 2.25846e-07, 2.23517e-08, 3.02214e-07, 0.493668, -5.21541e-08, -2.6077e-08, 1.49012e-08, 0.556349, 0.0331111, 0.43747, 0.00098896)
+visible = false
+mesh = SubResource("CapsuleMesh_y1wyv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/thumb_tip_attachment/thumb_tip"]
+transform = Transform3D(0.570342, 2.25846e-07, 2.23517e-08, 3.02214e-07, 0.493668, -5.21541e-08, -2.6077e-08, 1.49012e-08, 0.556349, 0.0331111, 0.43747, 0.00098896)
+shape = SubResource("CapsuleShape3D_v24qn")
+
+[node name="index_base_attachment" type="BoneAttachment3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="5"]
+transform = Transform3D(0.950745, 0.261421, 0.166561, -0.263849, 0.964533, -0.00777811, -0.162687, -0.036552, 0.986, 0.267559, 4.42226, 0.000583582)
 bone_name = "Bone.009"
 bone_idx = 6
 
-[node name="index_tip" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D/IndexFingerAttachment"]
-transform = Transform3D(1, 1.86265e-09, 0, -1.86265e-09, 1, 0, 0, 0, 1, 0, 0, 0)
-script = ExtResource("2_cmdsa")
+[node name="index_base" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D/index_base_attachment"]
+script = ExtResource("7_ligq1")
+bone_name = "Bone.009"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/IndexFingerAttachment/index_tip"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/index_base_attachment/index_base"]
+transform = Transform3D(0.63478, 2.79397e-08, -2.98023e-08, -2.77068e-08, 0.63478, -9.31323e-09, -1.49012e-08, 1.30385e-08, 0.63478, -0.0113058, 0.237391, 0.00409603)
 visible = false
-mesh = SubResource("SphereMesh_eyfoh")
-skeleton = NodePath("../../../../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_n04oe")
+mesh = SubResource("CapsuleMesh_n04oe")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/IndexFingerAttachment/index_tip"]
-shape = SubResource("SphereShape3D_eyfoh")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/index_base_attachment/index_base"]
+transform = Transform3D(0.63478, 2.79397e-08, -2.98023e-08, -2.77068e-08, 0.63478, -9.31323e-09, -1.49012e-08, 1.30385e-08, 0.63478, -0.0113058, 0.237391, 0.00409603)
+shape = SubResource("CapsuleShape3D_yinqy")
+
+[node name="index_middle_attachment" type="BoneAttachment3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="6"]
+transform = Transform3D(0.95924, 0.22829, 0.166561, -0.230238, 0.973103, -0.00777812, -0.163857, -0.0308876, 0.986, 0.464689, 5.1496, -0.0269804)
+bone_name = "Bone.010"
+bone_idx = 7
+
+[node name="index_middle" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D/index_middle_attachment"]
+script = ExtResource("7_ligq1")
+bone_name = "Bone.010"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/index_middle_attachment/index_middle"]
+transform = Transform3D(0.518915, 1.35042e-08, 2.98023e-08, -1.28057e-08, 0.456688, -4.65661e-09, -1.49012e-08, 2.79397e-09, 0.508203, 0.00359535, 0.294583, 0.0086751)
+visible = false
+mesh = SubResource("CapsuleMesh_n04oe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/index_middle_attachment/index_middle"]
+transform = Transform3D(0.518915, 1.35042e-08, 2.98023e-08, -1.28057e-08, 0.456688, -4.65661e-09, -1.49012e-08, 2.79397e-09, 0.508203, 0.00359535, 0.294583, 0.0086751)
+shape = SubResource("CapsuleShape3D_yinqy")
+
+[node name="index_tip_attachment" type="BoneAttachment3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="7"]
+transform = Transform3D(0.964341, 0.205681, 0.166561, -0.207303, 0.978246, -0.00777814, -0.164538, -0.0270279, 0.986, 0.608345, 5.76194, -0.046418)
+bone_name = "Bone.011"
+bone_idx = 8
+
+[node name="index_tip" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D/index_tip_attachment"]
+script = ExtResource("7_ligq1")
+bone_name = "Bone.011"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/index_tip_attachment/index_tip"]
+transform = Transform3D(0.44798, -2.468e-08, -2.23517e-08, 2.21189e-08, 0.44798, 2.79397e-09, 1.49012e-08, 4.65661e-09, 0.44798, -0.0020206, 0.297158, -0.0244665)
+visible = false
+mesh = SubResource("CapsuleMesh_n04oe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/index_tip_attachment/index_tip"]
+transform = Transform3D(0.44798, -2.468e-08, -2.23517e-08, 2.21189e-08, 0.44798, 2.79397e-09, 1.49012e-08, 4.65661e-09, 0.44798, -0.0020206, 0.297158, -0.0244665)
+shape = SubResource("CapsuleShape3D_yinqy")
+
+[node name="middle_base_attachment" type="BoneAttachment3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="8"]
+transform = Transform3D(0.985074, -0.0434435, 0.166561, 0.0453702, 0.99894, -0.00777805, -0.166046, 0.0152189, 0.986, -0.324214, 4.61553, 0.102073)
+bone_name = "Bone.012"
+bone_idx = 10
+
+[node name="index_base" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D/middle_base_attachment"]
+script = ExtResource("7_ligq1")
+bone_name = "Bone.012"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/middle_base_attachment/index_base"]
+transform = Transform3D(0.640838, 1.28057e-08, -7.45058e-09, -1.851e-08, 0.640838, -9.31323e-09, 0, 7.45058e-09, 0.640838, -0.0032227, 0.129293, -0.0168953)
+visible = false
+mesh = SubResource("CapsuleMesh_n04oe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/middle_base_attachment/index_base"]
+transform = Transform3D(0.640838, 1.28057e-08, -7.45058e-09, -1.851e-08, 0.640838, -9.31323e-09, 0, 7.45058e-09, 0.640838, -0.0032227, 0.129293, -0.0168953)
+shape = SubResource("CapsuleShape3D_yinqy")
+
+[node name="middle_middle_attachment" type="BoneAttachment3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="9"]
+transform = Transform3D(0.983423, -0.0716626, 0.166561, 0.0739859, 0.997229, -0.00777805, -0.165542, 0.0199723, 0.986, -0.359327, 5.4229, 0.114373)
+bone_name = "Bone.013"
+bone_idx = 11
+
+[node name="index_middle" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D/middle_middle_attachment"]
+script = ExtResource("7_ligq1")
+bone_name = "Bone.013"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/middle_middle_attachment/index_middle"]
+transform = Transform3D(0.549169, -2.32831e-09, -2.23517e-08, -7.68341e-09, 0.549169, -9.31323e-10, 1.49012e-08, 9.31323e-10, 0.549169, -0.00647771, 0.190736, 0.00908661)
+visible = false
+mesh = SubResource("CapsuleMesh_n04oe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/middle_middle_attachment/index_middle"]
+transform = Transform3D(0.549169, -2.32831e-09, -2.23517e-08, -7.68341e-09, 0.549169, -9.31323e-10, 1.49012e-08, 9.31323e-10, 0.549169, -0.00647771, 0.190736, 0.00908661)
+shape = SubResource("CapsuleShape3D_yinqy")
+
+[node name="middle_tip_attachment" type="BoneAttachment3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="10"]
+transform = Transform3D(0.983752, -0.067001, 0.166561, 0.0692589, 0.997568, -0.00777805, -0.165635, 0.0191875, 0.986, -0.411002, 6.14199, 0.128772)
+bone_name = "Bone.014"
+bone_idx = 12
+
+[node name="middle_tip" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D/middle_tip_attachment"]
+transform = Transform3D(1, -3.1665e-08, -1.49012e-08, 2.09548e-09, 1, 1.86265e-09, 2.98023e-08, -1.86265e-09, 1, 2.38419e-07, -4.76837e-07, 0)
+script = ExtResource("7_ligq1")
+bone_name = "Bone.014"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/middle_tip_attachment/middle_tip"]
+transform = Transform3D(0.487045, 1.62981e-09, 0, 7.21775e-09, 0.487045, -1.86265e-09, 0, -1.86265e-09, 0.487045, -0.00458062, 0.162014, 0.010685)
+visible = false
+mesh = SubResource("CapsuleMesh_yinqy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/middle_tip_attachment/middle_tip"]
+transform = Transform3D(0.487045, 1.62981e-09, 0, 7.21775e-09, 0.487045, -1.86265e-09, 0, -1.86265e-09, 0.487045, -0.00458062, 0.162014, 0.010685)
+shape = SubResource("CapsuleShape3D_ligq1")
+
+[node name="ring_base_attachment" type="BoneAttachment3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="11"]
+transform = Transform3D(0.902977, -0.396094, 0.166561, 0.402896, 0.915212, -0.00777814, -0.149357, 0.0741302, 0.986, -0.802167, 4.39511, 0.181075)
+bone_name = "Bone.015"
+bone_idx = 14
+
+[node name="index_base" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D/ring_base_attachment"]
+script = ExtResource("7_ligq1")
+bone_name = "Bone.015"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/ring_base_attachment/index_base"]
+transform = Transform3D(0.639268, 6.51926e-09, -4.47035e-08, -5.26197e-08, 0.639268, -7.45058e-09, -2.23517e-08, 0, 0.639268, 0.0134106, 0.289861, -0.0219212)
+visible = false
+mesh = SubResource("CapsuleMesh_n04oe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/ring_base_attachment/index_base"]
+transform = Transform3D(0.639268, 6.51926e-09, -4.47035e-08, -5.26197e-08, 0.639268, -7.45058e-09, -2.23517e-08, 0, 0.639268, 0.0134106, 0.289861, -0.0219212)
+shape = SubResource("CapsuleShape3D_yinqy")
+
+[node name="ring_middle_attachment" type="BoneAttachment3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="12"]
+transform = Transform3D(0.891441, -0.421416, 0.166561, 0.42856, 0.90348, -0.00777812, -0.147206, 0.078315, 0.986, -1.09635, 5.07483, 0.236131)
+bone_name = "Bone.016"
+bone_idx = 15
+
+[node name="index_middle" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D/ring_middle_attachment"]
+script = ExtResource("7_ligq1")
+bone_name = "Bone.016"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/ring_middle_attachment/index_middle"]
+transform = Transform3D(0.474249, 1.22003e-07, -8.9407e-08, 8.00937e-08, 0.448312, 2.98023e-08, 6.70552e-08, -2.6077e-08, 0.500665, 0.00582743, 0.382469, 0.00703001)
+visible = false
+mesh = SubResource("CapsuleMesh_n04oe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/ring_middle_attachment/index_middle"]
+transform = Transform3D(0.474249, 1.22003e-07, -8.9407e-08, 8.00937e-08, 0.448312, 2.98023e-08, 6.70552e-08, -2.6077e-08, 0.500665, 0.00582743, 0.382469, 0.00703001)
+shape = SubResource("CapsuleShape3D_yinqy")
+
+[node name="ring_tip_attachment" type="BoneAttachment3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="13"]
+transform = Transform3D(0.888498, -0.427584, 0.166561, 0.434812, 0.900488, -0.00777814, -0.14666, 0.0793334, 0.986, -1.34861, 5.61566, 0.28301)
+bone_name = "Bone.017"
+bone_idx = 16
+
+[node name="ring_tip" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D/ring_tip_attachment"]
+script = ExtResource("7_ligq1")
+bone_name = "Bone.017"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/ring_tip_attachment/ring_tip"]
+transform = Transform3D(0.452105, 4.19095e-09, 7.45058e-08, -2.41678e-07, 0.40839, 3.72529e-09, 5.21541e-08, 3.72529e-09, 0.451693, 0.00604343, 0.387903, -0.000619888)
+visible = false
+mesh = SubResource("CapsuleMesh_ligq1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/ring_tip_attachment/ring_tip"]
+transform = Transform3D(0.452105, 4.19095e-09, 7.45058e-08, -2.41678e-07, 0.40839, 3.72529e-09, 5.21541e-08, 3.72529e-09, 0.451693, 0.00604343, 0.387903, -0.000619888)
+shape = SubResource("CapsuleShape3D_y1wyv")
+
+[node name="little_base_attachment" type="BoneAttachment3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="14"]
+transform = Transform3D(0.772938, -0.612229, 0.166561, 0.621912, 0.783048, -0.00777799, -0.125663, 0.109598, 0.986, -1.18269, 3.97309, 0.242025)
+bone_name = "Bone.018"
+bone_idx = 18
+
+[node name="index_base" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D/little_base_attachment"]
+script = ExtResource("7_ligq1")
+bone_name = "Bone.018"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/little_base_attachment/index_base"]
+transform = Transform3D(0.589164, 2.8871e-08, -3.72529e-08, -1.49012e-07, 0.589164, -2.23517e-08, 3.72529e-08, -7.45058e-09, 0.589164, 0.0185018, 0.119984, -0.00832558)
+visible = false
+mesh = SubResource("CapsuleMesh_n04oe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/little_base_attachment/index_base"]
+transform = Transform3D(0.589164, 2.8871e-08, -3.72529e-08, -1.49012e-07, 0.589164, -2.23517e-08, 3.72529e-08, -7.45058e-09, 0.589164, 0.0185018, 0.119984, -0.00832558)
+shape = SubResource("CapsuleShape3D_yinqy")
+
+[node name="little_middle_attachment" type="BoneAttachment3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="15"]
+transform = Transform3D(0.802392, -0.573084, 0.166561, 0.582254, 0.81297, -0.0077782, -0.130951, 0.103222, 0.986, -1.546, 4.43776, 0.307062)
+bone_name = "Bone.019"
+bone_idx = 19
+
+[node name="index_middle" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D/little_middle_attachment"]
+script = ExtResource("7_ligq1")
+bone_name = "Bone.019"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/little_middle_attachment/index_middle"]
+transform = Transform3D(0.556758, 5.93718e-08, -5.21541e-08, 1.95578e-07, 0.280321, 3.72529e-09, -7.45058e-09, 7.45058e-09, 0.513695, -0.00415874, 0.175325, -0.00628757)
+visible = false
+mesh = SubResource("CapsuleMesh_n04oe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/little_middle_attachment/index_middle"]
+transform = Transform3D(0.556758, 5.93718e-08, -5.21541e-08, 1.95578e-07, 0.280321, 3.72529e-09, -7.45058e-09, 7.45058e-09, 0.513695, -0.00415874, 0.175325, -0.00628757)
+shape = SubResource("CapsuleShape3D_yinqy")
+
+[node name="little_tip_attachment" type="BoneAttachment3D" parent="BasiscHand_02/Armature_001/Skeleton3D" index="16"]
+transform = Transform3D(0.768161, -0.618212, 0.166561, 0.627975, 0.778195, -0.0077781, -0.124808, 0.110571, 0.986001, -1.79114, 4.78551, 0.351216)
+bone_name = "Bone.020"
+bone_idx = 20
+
+[node name="little_tip" type="Area3D" parent="BasiscHand_02/Armature_001/Skeleton3D/little_tip_attachment"]
+script = ExtResource("7_ligq1")
+bone_name = "Bone.020"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasiscHand_02/Armature_001/Skeleton3D/little_tip_attachment/little_tip"]
+transform = Transform3D(0.534063, -3.86499e-08, 1.30385e-07, 2.47732e-07, 0.30445, 8.19564e-08, 3.72529e-08, -2.6077e-08, 0.45445, 0.0137234, 0.193764, -0.0236206)
+visible = false
+mesh = SubResource("CapsuleMesh_v24qn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasiscHand_02/Armature_001/Skeleton3D/little_tip_attachment/little_tip"]
+transform = Transform3D(0.534063, -3.86499e-08, 1.30385e-07, 2.47732e-07, 0.30445, 8.19564e-08, 3.72529e-08, -2.6077e-08, 0.45445, 0.0137234, 0.193764, -0.0236206)
+shape = SubResource("CapsuleShape3D_bfalx")
 
 [node name="Cube" parent="BasiscHand_02" index="1"]
 surface_material_override/0 = SubResource("ShaderMaterial_ligq1")
