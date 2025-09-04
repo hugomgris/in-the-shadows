@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://gn834exajy0j"
+path="res://.godot/imported/1-21. Talus Battle.ogg-3808a1c6010010463d6abc681ab4b1a0.oggvorbisstr"
+
+[deps]
+
+source_file="res://1-21. Talus Battle.ogg"
+dest_files=["res://.godot/imported/1-21. Talus Battle.ogg-3808a1c6010010463d6abc681ab4b1a0.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

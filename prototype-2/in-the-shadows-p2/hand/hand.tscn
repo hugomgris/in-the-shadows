@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8d215ltj8qas"]
+
+[ext_resource type="PackedScene" uid="uid://bxh7rwaed0eb2" path="res://hand/hand_model.tscn" id="1_t1j3k"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Hand_Model" parent="." instance=ExtResource("1_t1j3k")]

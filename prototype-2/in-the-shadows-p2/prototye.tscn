@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://chdfvrnjy4hn3"]
+
+[ext_resource type="PackedScene" uid="uid://c8d215ltj8qas" path="res://hand/hand.tscn" id="1_4xnev"]
+[ext_resource type="PackedScene" uid="uid://fqm8crtuvs4w" path="res://level/level.tscn" id="2_6uoe6"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.882053, 0, -0.471151, 0, 1, 0, 0.471151, 0, -0.882053, -3.70876, -0.156933, -3.72521)
+
+[node name="Hand" parent="." instance=ExtResource("1_4xnev")]
+
+[node name="level" parent="." instance=ExtResource("2_6uoe6")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.955087, 0.00414251, 0.296296, 1.22214e-09, 0.999902, -0.0139796, -0.296325, -0.0133518, -0.954994, 2.59481, 0, -8.89763)
+light_color = Color(0.869087, 0.867669, 0.814439, 1)
+light_energy = 16.0
+shadow_enabled = true
+spot_range = 24.5545
+spot_angle = 22.5
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.08271, 4.32823, -5.06771)
+light_color = Color(0.927407, 0.93185, 0.700542, 1)
+omni_range = 113.889

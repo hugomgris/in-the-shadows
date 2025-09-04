@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxh7rwaed0eb2"]
+
+[ext_resource type="PackedScene" uid="uid://dayey43gflnbk" path="res://hand/hand_model.glb" id="1_hkox5"]
+[ext_resource type="Script" uid="uid://bmn5a6g8jaxdr" path="res://hand/skelleton_controller.gd" id="2_o87j2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hkox5"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_o87j2"]
+
+[node name="Hand_Model" instance=ExtResource("1_hkox5")]
+
+[node name="Skeleton3D" parent="Armature_001" index="0"]
+unique_name_in_owner = true
+bones/0/rotation = Quaternion(-0.030928, 0.0894473, 0.740261, 0.665625)
+bones/5/rotation = Quaternion(7.22983e-08, 4.20987e-08, -0.199614, 0.979875)
+bones/9/rotation = Quaternion(6.97228e-08, -7.52369e-09, -0.00934459, 0.999956)
+bones/13/rotation = Quaternion(7.56316e-08, -4.16773e-08, 0.150422, 0.988622)
+bones/18/rotation = Quaternion(-1.38408e-09, 1.33458e-07, -0.040005, 0.9992)
+bones/19/rotation = Quaternion(3.51778e-09, -1.78631e-07, -0.024841, 0.999691)
+bones/20/rotation = Quaternion(-1.69079e-11, 9.06123e-08, 0.0287229, 0.999587)
+script = ExtResource("2_o87j2")
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="2"]
+transform = Transform3D(0.24195, -0.970281, 0.00395182, 0.956553, 0.239206, 0.166696, -0.162687, -0.0365519, 0.986, -0.502674, 0.608786, -0.105893)
+bone_name = "Bone.009"
+bone_idx = 6
+
+[node name="Area3D" type="Area3D" parent="Armature_001/Skeleton3D/BoneAttachment3D" index="0"]
+unique_name_in_owner = true
+transform = Transform3D(0.700317, 1.86265e-09, 0, 9.31323e-10, 0.700317, 0, -7.45058e-09, -1.86265e-09, 0.700317, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/BoneAttachment3D/Area3D" index="0"]
+shape = SubResource("CapsuleShape3D_hkox5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature_001/Skeleton3D/BoneAttachment3D/Area3D" index="1"]
+visible = false
+mesh = SubResource("CapsuleMesh_o87j2")
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "Hand_Idle"
