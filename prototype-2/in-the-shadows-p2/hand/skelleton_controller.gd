@@ -30,7 +30,7 @@ func setup_bone_attachments():
 		var bone_id = find_bone(bone_name)
 
 		if bone_id != -1:
-			bone_data[bone_id] = {
+			bone_data[bone_id] = { 
 				"attachment": attachment,
 				"initial_rotation": get_bone_pose_rotation(bone_id),
 				"accumulated_rotation": Vector3.ZERO

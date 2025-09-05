@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://chdfvrnjy4hn3"]
+[gd_scene load_steps=6 format=3 uid="uid://chdfvrnjy4hn3"]
 
 [ext_resource type="PackedScene" uid="uid://c8d215ltj8qas" path="res://hand/hand.tscn" id="1_4xnev"]
 [ext_resource type="Shader" uid="uid://bex80yesxkb7p" path="res://shaders/hand.gdshader" id="2_46o83"]
 [ext_resource type="Texture2D" uid="uid://bcedkkbrsj431" path="res://shaders/color_gradient.tres" id="3_exge7"]
+[ext_resource type="Script" uid="uid://h1g70xo3rodw" path="res://camera_controller.gd" id="4_exge7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4kmpq"]
 render_priority = 0
@@ -39,3 +40,4 @@ size = Vector3(9.80676, 15.3548, 1.2998)
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.940733, 0, -0.339148, 0, 1, 0, 0.339148, 0, -0.940733, -8.63638, 0, -6.28834)
 fov = 60.1
+script = ExtResource("4_exge7")
