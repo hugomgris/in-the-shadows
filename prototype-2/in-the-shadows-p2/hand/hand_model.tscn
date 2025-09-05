@@ -1,7 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxh7rwaed0eb2"]
+[gd_scene load_steps=10 format=3 uid="uid://bxh7rwaed0eb2"]
 
 [ext_resource type="PackedScene" uid="uid://dayey43gflnbk" path="res://hand/hand_model.glb" id="1_hkox5"]
 [ext_resource type="Script" uid="uid://bmn5a6g8jaxdr" path="res://hand/skelleton_controller.gd" id="2_o87j2"]
+[ext_resource type="Shader" uid="uid://bex80yesxkb7p" path="res://shaders/hand.gdshader" id="3_5jb37"]
+[ext_resource type="Texture2D" uid="uid://bcedkkbrsj431" path="res://shaders/color_gradient.tres" id="4_77sws"]
+[ext_resource type="Texture2D" uid="uid://did3p25l52we" path="res://shaders/fresnel_gradient.tres" id="5_77sws"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5jb37"]
+render_priority = 0
+shader = ExtResource("3_5jb37")
+shader_parameter/albedo = Color(0.911314, 0.544379, 0.38495, 1)
+shader_parameter/color_gradient = ExtResource("4_77sws")
+shader_parameter/fresnel_gradient = ExtResource("5_77sws")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_77sws"]
+render_priority = 0
+shader = ExtResource("3_5jb37")
+shader_parameter/albedo = Color(0.15659, 0.312418, 0.824169, 1)
+shader_parameter/color_gradient = ExtResource("4_77sws")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hkox5"]
 
@@ -20,20 +36,53 @@ bones/19/rotation = Quaternion(3.51778e-09, -1.78631e-07, -0.024841, 0.999691)
 bones/20/rotation = Quaternion(-1.69079e-11, 9.06123e-08, 0.0287229, 0.999587)
 script = ExtResource("2_o87j2")
 
-[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="2"]
+[node name="Hand_01_001" parent="Armature_001/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_5jb37")
+
+[node name="Sleeve_002" parent="Armature_001/Skeleton3D" index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_77sws")
+
+[node name="Index_Base" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="2"]
 transform = Transform3D(0.24195, -0.970281, 0.00395182, 0.956553, 0.239206, 0.166696, -0.162687, -0.0365519, 0.986, -0.502674, 0.608786, -0.105893)
 bone_name = "Bone.009"
 bone_idx = 6
 
-[node name="Area3D" type="Area3D" parent="Armature_001/Skeleton3D/BoneAttachment3D" index="0"]
+[node name="Area3D" type="Area3D" parent="Armature_001/Skeleton3D/Index_Base" index="0"]
 unique_name_in_owner = true
 transform = Transform3D(0.700317, 1.86265e-09, 0, 9.31323e-10, 0.700317, 0, -7.45058e-09, -1.86265e-09, 0.700317, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/BoneAttachment3D/Area3D" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Index_Base/Area3D" index="0"]
 shape = SubResource("CapsuleShape3D_hkox5")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature_001/Skeleton3D/BoneAttachment3D/Area3D" index="1"]
-visible = false
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature_001/Skeleton3D/Index_Base/Area3D" index="1"]
+mesh = SubResource("CapsuleMesh_o87j2")
+
+[node name="Index_Mid" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="3"]
+transform = Transform3D(0.208154, -0.978088, 0.00395183, 0.964273, 0.205887, 0.166696, -0.163857, -0.0308877, 0.986, -1.23434, 0.789165, -0.133456)
+bone_name = "Bone.010"
+bone_idx = 7
+
+[node name="Area3D" type="Area3D" parent="Armature_001/Skeleton3D/Index_Mid" index="0"]
+transform = Transform3D(0.560895, 2.30502e-08, 0, -6.28643e-09, 0.560895, -3.72529e-09, -1.49012e-08, 0, 0.560895, -0.018661, 0.0876852, -0.00035429)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Index_Mid/Area3D" index="0"]
+shape = SubResource("CapsuleShape3D_hkox5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature_001/Skeleton3D/Index_Mid/Area3D" index="1"]
+mesh = SubResource("CapsuleMesh_o87j2")
+
+[node name="Index_Tip" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="4"]
+transform = Transform3D(0.185107, -0.98271, 0.00395184, 0.968846, 0.183166, 0.166696, -0.164538, -0.0270278, 0.986, -1.84982, 0.918724, -0.152892)
+bone_name = "Bone.011"
+bone_idx = 8
+
+[node name="Area3D" type="Area3D" parent="Armature_001/Skeleton3D/Index_Tip" index="0"]
+transform = Transform3D(0.482567, 1.39698e-08, 1.49012e-08, -2.32831e-10, 0.482567, 3.72529e-09, -1.49012e-08, 0, 0.482567, 0.00313222, 0.201879, 0.0060565)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Index_Tip/Area3D" index="0"]
+shape = SubResource("CapsuleShape3D_hkox5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature_001/Skeleton3D/Index_Tip/Area3D" index="1"]
 mesh = SubResource("CapsuleMesh_o87j2")
 
 [node name="AnimationPlayer" parent="." index="1"]

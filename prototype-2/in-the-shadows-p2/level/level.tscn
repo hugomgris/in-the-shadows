@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://fqm8crtuvs4w"]
-
-[ext_resource type="PackedScene" uid="uid://crdw4nqm6eqtn" path="res://level/level.glb" id="1_7lnir"]
-
-[node name="level" instance=ExtResource("1_7lnir")]
