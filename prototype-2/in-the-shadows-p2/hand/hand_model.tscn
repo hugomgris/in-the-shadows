@@ -84,6 +84,7 @@ bones/0/rotation = Quaternion(-0.030928, 0.0894473, 0.740261, 0.665625)
 bones/5/rotation = Quaternion(7.22983e-08, 4.20987e-08, -0.199614, 0.979875)
 bones/9/rotation = Quaternion(6.97228e-08, -7.52369e-09, -0.00934459, 0.999956)
 bones/13/rotation = Quaternion(7.56316e-08, -4.16773e-08, 0.150422, 0.988622)
+bones/17/rotation = Quaternion(9.28774e-08, -9.53021e-08, 0.32958, 0.944128)
 script = ExtResource("2_o87j2")
 
 [node name="Hand_01_001" parent="Armature_001/Skeleton3D" index="0"]
@@ -93,7 +94,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_5jb37")
 surface_material_override/0 = SubResource("ShaderMaterial_77sws")
 
 [node name="Palm" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="2"]
-transform = Transform3D(-0.101983, -0.994778, 0.00395162, 0.980934, -0.0999015, 0.166695, -0.16543, 0.0208764, 0.986, 1.51986, 0.202643, -0.0453355)
+transform = Transform3D(-0.101983, -0.994778, 0.00395164, 0.980934, -0.0999019, 0.166695, -0.16543, 0.0208765, 0.986, 1.51986, 0.202642, -0.0453352)
 bone_name = "Bone.001"
 bone_idx = 1
 
@@ -105,7 +106,7 @@ transform = Transform3D(0.999997, -3.57628e-07, 2.25846e-08, -1.83936e-08, -4.84
 shape = SubResource("CylinderShape3D_hmrq0")
 
 [node name="Thumb_Base" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="3"]
-transform = Transform3D(0.833477, -0.55254, 0.00395192, 0.544264, 0.822185, 0.166696, -0.0953552, -0.136786, 0.986, 0.164902, 1.12106, -0.195174)
+transform = Transform3D(0.833476, -0.552541, 0.00395193, 0.544265, 0.822185, 0.166696, -0.0953553, -0.136786, 0.986, 0.164902, 1.12106, -0.195174)
 bone_name = "Bone.007"
 bone_idx = 3
 
@@ -118,7 +119,7 @@ shape = SubResource("CylinderShape3D_25g5k")
 debug_color = Color(0.921914, 0.208158, 0.472196, 0.42)
 
 [node name="Thumb_Mid" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="4"]
-transform = Transform3D(0.82908, -0.559116, 0.003952, 0.550751, 0.817854, 0.166696, -0.0964344, -0.136028, 0.986, -0.0834284, 1.49057, -0.256651)
+transform = Transform3D(0.82908, -0.559116, 0.00395202, 0.550751, 0.817854, 0.166696, -0.0964344, -0.136027, 0.986, -0.0834285, 1.49057, -0.25665)
 bone_name = "Bone.008"
 bone_idx = 4
 
@@ -126,12 +127,12 @@ bone_idx = 4
 transform = Transform3D(0.568732, -1.86265e-09, 3.72529e-09, 8.9407e-08, 0.568732, 4.47035e-08, -2.98023e-08, -2.23517e-08, 0.568732, 0.0311292, -0.0312555, -0.0118934)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Thumb_Mid/Area3D" index="0"]
-transform = Transform3D(0.999999, -2.19885e-06, 4.47035e-08, -1.49943e-07, 0.999987, -3.42727e-07, -6.70552e-08, -4.17233e-07, 0.99999, 0, 0.535522, -2.98023e-08)
+transform = Transform3D(0.999999, 1.49941e-07, 6.70547e-08, -1.49943e-07, 0.999987, 4.17234e-07, -6.70552e-08, -4.17233e-07, 0.99999, 0, 0.535522, -2.98023e-08)
 shape = SubResource("CylinderShape3D_f6ygi")
 debug_color = Color(0.605551, 0.539999, 0.0842129, 0.42)
 
 [node name="Index_Base" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="5"]
-transform = Transform3D(0.24195, -0.970281, 0.00395181, 0.956553, 0.239206, 0.166696, -0.162687, -0.0365519, 0.986, -0.502675, 0.608786, -0.105893)
+transform = Transform3D(0.24195, -0.970281, 0.00395182, 0.956553, 0.239206, 0.166696, -0.162687, -0.0365519, 0.986, -0.502674, 0.608786, -0.105893)
 bone_name = "Bone.009"
 bone_idx = 6
 
@@ -145,7 +146,7 @@ shape = SubResource("CylinderShape3D_77sws")
 debug_color = Color(0.976608, 0, 0.410551, 0.42)
 
 [node name="Index_Mid" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="6"]
-transform = Transform3D(0.208153, -0.978088, 0.00395182, 0.964273, 0.205887, 0.166696, -0.163857, -0.0308877, 0.986, -1.23434, 0.789166, -0.133456)
+transform = Transform3D(0.208154, -0.978088, 0.00395183, 0.964273, 0.205887, 0.166696, -0.163857, -0.0308877, 0.986, -1.23434, 0.789165, -0.133456)
 bone_name = "Bone.010"
 bone_idx = 7
 
@@ -158,7 +159,7 @@ shape = SubResource("CylinderShape3D_mvdak")
 debug_color = Color(0.667424, 0.504982, 0.215591, 0.42)
 
 [node name="Index_Tip" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="7"]
-transform = Transform3D(0.185107, -0.982711, 0.00395182, 0.968846, 0.183166, 0.166696, -0.164538, -0.0270278, 0.986, -1.84983, 0.918725, -0.152893)
+transform = Transform3D(0.185107, -0.98271, 0.00395184, 0.968846, 0.183166, 0.166696, -0.164538, -0.0270278, 0.986, -1.84982, 0.918724, -0.152892)
 bone_name = "Bone.011"
 bone_idx = 8
 
@@ -171,7 +172,7 @@ shape = SubResource("CylinderShape3D_476bg")
 debug_color = Color(5.19812e-06, 0.639622, 0.361995, 0.42)
 
 [node name="Mid_Base" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="8"]
-transform = Transform3D(-0.0679752, -0.997679, 0.00395176, 0.983772, -0.0663674, 0.166696, -0.166046, 0.0152188, 0.986, -0.682304, 0.0127324, -0.00440282)
+transform = Transform3D(-0.0679756, -0.997679, 0.00395178, 0.983772, -0.0663678, 0.166696, -0.166046, 0.0152189, 0.986, -0.682304, 0.0127306, -0.0044024)
 bone_name = "Bone.012"
 bone_idx = 10
 
@@ -184,7 +185,7 @@ shape = SubResource("CylinderShape3D_px1ro")
 debug_color = Color(0.800462, 0.366733, 0.5429, 0.42)
 
 [node name="Mid_mid" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="9"]
-transform = Transform3D(-0.0965455, -0.995321, 0.00395175, 0.981465, -0.0945398, 0.166696, -0.165542, 0.0199722, 0.986, -1.48866, -0.0409075, 0.00789742)
+transform = Transform3D(-0.0965459, -0.99532, 0.00395177, 0.981465, -0.0945401, 0.166696, -0.165542, 0.0199723, 0.986, -1.48865, -0.0409096, 0.00789791)
 bone_name = "Bone.013"
 bone_idx = 11
 
@@ -197,7 +198,7 @@ shape = SubResource("CylinderShape3D_srlbc")
 debug_color = Color(0.583038, 0.539565, 0.316379, 0.42)
 
 [node name="Mid_Tip" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="10"]
-transform = Transform3D(-0.0918272, -0.995767, 0.00395175, 0.981902, -0.0898872, 0.166696, -0.165635, 0.0191874, 0.986, -2.20636, -0.109078, 0.022299)
+transform = Transform3D(-0.0918276, -0.995767, 0.00395177, 0.981902, -0.0898875, 0.166696, -0.165635, 0.0191875, 0.986, -2.20636, -0.109081, 0.0222996)
 bone_name = "Bone.014"
 bone_idx = 12
 
@@ -210,7 +211,7 @@ shape = SubResource("CylinderShape3D_44ffw")
 debug_color = Color(0.213557, 0.629416, 0.335182, 0.42)
 
 [node name="Ring_Base" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="11"]
-transform = Transform3D(-0.423523, -0.905877, 0.00395186, 0.893488, -0.417003, 0.166695, -0.149357, 0.0741302, 0.986, -0.450964, -0.460035, 0.0745971)
+transform = Transform3D(-0.423523, -0.905877, 0.00395187, 0.893488, -0.417004, 0.166695, -0.149357, 0.0741302, 0.986, -0.450963, -0.460036, 0.0745974)
 bone_name = "Bone.015"
 bone_idx = 14
 
@@ -223,7 +224,7 @@ shape = SubResource("CylinderShape3D_8hx3h")
 debug_color = Color(0.875049, 0.257297, 0.584366, 0.42)
 
 [node name="Ring_Mid" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="12"]
-transform = Transform3D(-0.448915, -0.893566, 0.00395183, 0.881366, -0.442048, 0.166695, -0.147206, 0.078315, 0.986, -1.12376, -0.769742, 0.129653)
+transform = Transform3D(-0.448915, -0.893566, 0.00395185, 0.881366, -0.442049, 0.166695, -0.147206, 0.0783151, 0.986, -1.12376, -0.769744, 0.129654)
 bone_name = "Bone.016"
 bone_idx = 15
 
@@ -236,7 +237,7 @@ shape = SubResource("CylinderShape3D_k741v")
 debug_color = Color(0.623737, 0.529822, 0.154343, 0.42)
 
 [node name="Ring_Tip" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="13"]
-transform = Transform3D(-0.455097, -0.890433, 0.00395185, 0.878281, -0.448147, 0.166695, -0.14666, 0.0793334, 0.986, -1.65865, -1.03436, 0.176534)
+transform = Transform3D(-0.455097, -0.890433, 0.00395187, 0.878281, -0.448147, 0.166695, -0.14666, 0.0793335, 0.986, -1.65865, -1.03436, 0.176534)
 bone_name = "Bone.017"
 bone_idx = 16
 
@@ -249,7 +250,7 @@ shape = SubResource("CylinderShape3D_pamkq")
 debug_color = Color(0.150263, 0.638556, 0.274393, 0.42)
 
 [node name="Little_Base" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="14"]
-transform = Transform3D(-0.639495, -0.768785, 0.00395171, 0.758456, -0.630045, 0.166696, -0.125663, 0.109598, 0.986, -0.0203177, -0.83077, 0.135549)
+transform = Transform3D(-0.639495, -0.768785, 0.00395171, 0.758455, -0.630046, 0.166696, -0.125663, 0.109598, 0.986, -0.0203169, -0.830772, 0.135549)
 bone_name = "Bone.018"
 bone_idx = 18
 
@@ -262,7 +263,7 @@ shape = SubResource("CylinderShape3D_vi05g")
 debug_color = Color(0.908848, 0.216411, 0.524658, 0.42)
 
 [node name="Little_Mid" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="15"]
-transform = Transform3D(-0.600522, -0.799598, 0.00395193, 0.788812, -0.591598, 0.166695, -0.130951, 0.103222, 0.986, -0.476525, -1.20465, 0.200586)
+transform = Transform3D(-0.600523, -0.799598, 0.00395194, 0.788812, -0.591598, 0.166695, -0.130951, 0.103222, 0.986, -0.476524, -1.20465, 0.200586)
 bone_name = "Bone.019"
 bone_idx = 19
 
@@ -275,7 +276,7 @@ shape = SubResource("CylinderShape3D_bja3q")
 debug_color = Color(0.596158, 0.54366, 0.107421, 0.42)
 
 [node name="Little_Tip" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="16"]
-transform = Transform3D(-0.645446, -0.763795, 0.00395181, 0.75354, -0.635917, 0.166695, -0.124808, 0.110571, 0.986, -0.818555, -1.45771, 0.244739)
+transform = Transform3D(-0.645446, -0.763795, 0.00395182, 0.753539, -0.635917, 0.166695, -0.124808, 0.110571, 0.986, -0.818554, -1.45771, 0.244739)
 bone_name = "Bone.020"
 bone_idx = 20
 

@@ -60,10 +60,9 @@ func _input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed and not _is_rotating and hovered_bone_id != -1:
 				current_bone_id = hovered_bone_id
-				if get_bone_name(current_bone_id) in draggable_bones:
-					_is_dragging = true
-					_has_dragged = false
-					print("Selected bone: ", get_bone_name(current_bone_id))
+				_is_dragging = true
+				_has_dragged = false
+				print("Selected bone: ", get_bone_name(current_bone_id))
 
 			elif not event.pressed and current_bone_id != -1:
 				if _is_dragging:
@@ -96,6 +95,9 @@ func _physics_process(delta: float) -> void:
 			0.0,
 			_mouse_input_direction.y * rotation_speed * delta
 		)
+		
+		if get_bone_name(current_bone_id) not in draggable_bones:
+			rotation_input.z = 0.0
 
 		var bone_rotation = bone_data[current_bone_id]["accumulated_rotation"]
 		bone_rotation += rotation_input
