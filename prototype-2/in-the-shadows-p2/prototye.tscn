@@ -23,7 +23,7 @@ shadow_enabled = true
 shadow_blur = 1.214
 spot_range = 72.9107
 spot_attenuation = 0.14
-spot_angle = 46.3398
+spot_angle = 38.5244
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.40306, 1.84578, -2.83465)
@@ -38,6 +38,6 @@ material_override = SubResource("ShaderMaterial_4kmpq")
 size = Vector3(9.80676, 15.3548, 1.2998)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.940733, 0, -0.339148, 0, 1, 0, 0.339148, 0, -0.940733, -8.63638, 0, -6.28834)
+transform = Transform3D(-0.940733, 0, -0.339148, 0, 1, 0, 0.339148, 0, -0.940733, -4.77466, 0, -3.6327)
 fov = 60.1
 script = ExtResource("4_exge7")

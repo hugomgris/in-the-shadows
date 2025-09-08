@@ -17,6 +17,7 @@ var _is_dragging := false
 var _has_dragged := false
 var _target_rotation: Quaternion
 var _is_rotating := false
+var draggable_bones = ["Bone.001", "Bone.007", "Bone.009", "Bone.012", "Bone.015", "Bone.018"]
 
 func _ready():
 	print("Skeleton controller initialized with ", get_bone_count(), " bones")
@@ -45,21 +46,24 @@ func setup_bone_attachments():
 
 func _on_bone_area_mouse_entered(bone_id: int):
 	hovered_bone_id = bone_id
-	print("Mouse entered bone: ", get_bone_name(bone_id))
+	if not _is_dragging and not _is_rotating:
+		print("Mouse entered bone: ", get_bone_name(bone_id))
 
 func _on_bone_area_mouse_exited(bone_id: int):
 	if hovered_bone_id == bone_id:
 		hovered_bone_id = -1
-	print("Mouse exited bone: ", get_bone_name(bone_id))
+	if not _is_dragging and not _is_rotating:
+		print("Mouse exited bone: ", get_bone_name(bone_id))
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed and not _is_rotating and hovered_bone_id != -1:
 				current_bone_id = hovered_bone_id
-				_is_dragging = true
-				_has_dragged = false
-				print("Selected bone: ", get_bone_name(current_bone_id))
+				if get_bone_name(current_bone_id) in draggable_bones:
+					_is_dragging = true
+					_has_dragged = false
+					print("Selected bone: ", get_bone_name(current_bone_id))
 
 			elif not event.pressed and current_bone_id != -1:
 				if _is_dragging:

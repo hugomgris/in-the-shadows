@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bxh7rwaed0eb2"]
+[gd_scene load_steps=23 format=3 uid="uid://bxh7rwaed0eb2"]
 
 [ext_resource type="PackedScene" uid="uid://dayey43gflnbk" path="res://hand/hand_model.glb" id="1_hkox5"]
 [ext_resource type="Script" uid="uid://bmn5a6g8jaxdr" path="res://hand/skelleton_controller.gd" id="2_o87j2"]
@@ -19,15 +19,62 @@ shader = ExtResource("3_5jb37")
 shader_parameter/albedo = Color(0.15659, 0.312418, 0.824169, 1)
 shader_parameter/color_gradient = ExtResource("4_77sws")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_77sws"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hmrq0"]
+height = 0.529297
+radius = 0.496094
 
-[sub_resource type="SphereMesh" id="SphereMesh_mvdak"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_25g5k"]
+height = 0.55127
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hkox5"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_f6ygi"]
+height = 0.928955
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_o87j2"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_77sws"]
+height = 1.25079
+radius = 0.42627
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_77sws"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mvdak"]
+height = 1.14429
+radius = 0.458008
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_476bg"]
+height = 1.26038
+radius = 0.475586
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_px1ro"]
+height = 1.16943
+radius = 0.459961
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_srlbc"]
+height = 1.16467
+radius = 0.470215
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_44ffw"]
+height = 1.16467
+radius = 0.497559
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8hx3h"]
+height = 1.06689
+radius = 0.401855
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_k741v"]
+height = 1.01807
+radius = 0.45459
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pamkq"]
+height = 0.977417
+radius = 0.478516
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vi05g"]
+height = 0.932495
+radius = 0.395508
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bja3q"]
+height = 0.734375
+radius = 0.451172
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4ao4k"]
+height = 0.737549
 
 [node name="Hand_Model" instance=ExtResource("1_hkox5")]
 
@@ -46,7 +93,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_5jb37")
 surface_material_override/0 = SubResource("ShaderMaterial_77sws")
 
 [node name="Palm" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="2"]
-transform = Transform3D(-0.101983, -0.994778, 0.00395164, 0.980934, -0.0999019, 0.166695, -0.16543, 0.0208765, 0.986, 1.51986, 0.202642, -0.0453352)
+transform = Transform3D(-0.101983, -0.994778, 0.00395162, 0.980934, -0.0999015, 0.166695, -0.16543, 0.0208764, 0.986, 1.51986, 0.202643, -0.0453355)
 bone_name = "Bone.001"
 bone_idx = 1
 
@@ -54,13 +101,11 @@ bone_idx = 1
 transform = Transform3D(2.03265, 4.42378e-08, 0, -2.51457e-08, 2.03265, -1.00583e-07, -2.98023e-08, 1.08033e-07, 2.03265, 0.117865, 1.14969, -0.00456702)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Palm/Area3D" index="0"]
-shape = SubResource("SphereShape3D_77sws")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature_001/Skeleton3D/Palm/Area3D" index="1"]
-mesh = SubResource("SphereMesh_mvdak")
+transform = Transform3D(0.999997, -3.57628e-07, 2.25846e-08, -1.83936e-08, -4.84288e-08, -0.999997, 2.83122e-07, 0.999995, -2.42144e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_hmrq0")
 
 [node name="Thumb_Base" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="3"]
-transform = Transform3D(0.833476, -0.552541, 0.00395193, 0.544265, 0.822185, 0.166696, -0.0953553, -0.136786, 0.986, 0.164902, 1.12106, -0.195174)
+transform = Transform3D(0.833477, -0.55254, 0.00395192, 0.544264, 0.822185, 0.166696, -0.0953552, -0.136786, 0.986, 0.164902, 1.12106, -0.195174)
 bone_name = "Bone.007"
 bone_idx = 3
 
@@ -68,13 +113,12 @@ bone_idx = 3
 transform = Transform3D(0.700317, 1.86265e-09, 0, 9.31323e-10, 0.700317, 0, -7.45058e-09, -1.86265e-09, 0.700317, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Thumb_Base/Area3D" index="0"]
-shape = SubResource("CapsuleShape3D_hkox5")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature_001/Skeleton3D/Thumb_Base/Area3D" index="1"]
-mesh = SubResource("CapsuleMesh_o87j2")
+transform = Transform3D(1, -1.02445e-08, 0, -1.76951e-08, 1, 2.98023e-08, 0, 0, 1, 1.19209e-07, 0.379639, -1.19209e-07)
+shape = SubResource("CylinderShape3D_25g5k")
+debug_color = Color(0.921914, 0.208158, 0.472196, 0.42)
 
 [node name="Thumb_Mid" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="4"]
-transform = Transform3D(0.82908, -0.559116, 0.00395202, 0.550751, 0.817854, 0.166696, -0.0964344, -0.136027, 0.986, -0.0834285, 1.49057, -0.25665)
+transform = Transform3D(0.82908, -0.559116, 0.003952, 0.550751, 0.817854, 0.166696, -0.0964344, -0.136028, 0.986, -0.0834284, 1.49057, -0.256651)
 bone_name = "Bone.008"
 bone_idx = 4
 
@@ -82,13 +126,12 @@ bone_idx = 4
 transform = Transform3D(0.568732, -1.86265e-09, 3.72529e-09, 8.9407e-08, 0.568732, 4.47035e-08, -2.98023e-08, -2.23517e-08, 0.568732, 0.0311292, -0.0312555, -0.0118934)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Thumb_Mid/Area3D" index="0"]
-shape = SubResource("CapsuleShape3D_hkox5")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature_001/Skeleton3D/Thumb_Mid/Area3D" index="1"]
-mesh = SubResource("CapsuleMesh_o87j2")
+transform = Transform3D(0.999999, -2.19885e-06, 4.47035e-08, -1.49943e-07, 0.999987, -3.42727e-07, -6.70552e-08, -4.17233e-07, 0.99999, 0, 0.535522, -2.98023e-08)
+shape = SubResource("CylinderShape3D_f6ygi")
+debug_color = Color(0.605551, 0.539999, 0.0842129, 0.42)
 
 [node name="Index_Base" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="5"]
-transform = Transform3D(0.24195, -0.970281, 0.00395182, 0.956553, 0.239206, 0.166696, -0.162687, -0.0365519, 0.986, -0.502674, 0.608786, -0.105893)
+transform = Transform3D(0.24195, -0.970281, 0.00395181, 0.956553, 0.239206, 0.166696, -0.162687, -0.0365519, 0.986, -0.502675, 0.608786, -0.105893)
 bone_name = "Bone.009"
 bone_idx = 6
 
@@ -97,13 +140,12 @@ unique_name_in_owner = true
 transform = Transform3D(0.700317, 1.86265e-09, 0, 9.31323e-10, 0.700317, 0, -7.45058e-09, -1.86265e-09, 0.700317, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Index_Base/Area3D" index="0"]
-shape = SubResource("CapsuleShape3D_hkox5")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature_001/Skeleton3D/Index_Base/Area3D" index="1"]
-mesh = SubResource("CapsuleMesh_o87j2")
+transform = Transform3D(1, -3.25963e-09, 0, -4.09782e-08, 1, 0, -2.5332e-07, 0, 1, 2.38419e-07, 0.449432, 2.98023e-08)
+shape = SubResource("CylinderShape3D_77sws")
+debug_color = Color(0.976608, 0, 0.410551, 0.42)
 
 [node name="Index_Mid" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="6"]
-transform = Transform3D(0.208154, -0.978088, 0.00395183, 0.964273, 0.205887, 0.166696, -0.163857, -0.0308877, 0.986, -1.23434, 0.789165, -0.133456)
+transform = Transform3D(0.208153, -0.978088, 0.00395182, 0.964273, 0.205887, 0.166696, -0.163857, -0.0308877, 0.986, -1.23434, 0.789166, -0.133456)
 bone_name = "Bone.010"
 bone_idx = 7
 
@@ -111,13 +153,12 @@ bone_idx = 7
 transform = Transform3D(0.560895, 2.30502e-08, 0, -6.28643e-09, 0.560895, -3.72529e-09, -1.49012e-08, 0, 0.560895, -0.018661, 0.0876852, -0.00035429)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Index_Mid/Area3D" index="0"]
-shape = SubResource("CapsuleShape3D_hkox5")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature_001/Skeleton3D/Index_Mid/Area3D" index="1"]
-mesh = SubResource("CapsuleMesh_o87j2")
+transform = Transform3D(1, -7.39936e-07, -1.19209e-07, 1.86265e-09, 1, -1.06171e-07, 1.49012e-08, 4.84288e-08, 1, 0.035273, 0.427857, -1.93715e-07)
+shape = SubResource("CylinderShape3D_mvdak")
+debug_color = Color(0.667424, 0.504982, 0.215591, 0.42)
 
 [node name="Index_Tip" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="7"]
-transform = Transform3D(0.185107, -0.98271, 0.00395184, 0.968846, 0.183166, 0.166696, -0.164538, -0.0270278, 0.986, -1.84982, 0.918724, -0.152892)
+transform = Transform3D(0.185107, -0.982711, 0.00395182, 0.968846, 0.183166, 0.166696, -0.164538, -0.0270278, 0.986, -1.84983, 0.918725, -0.152893)
 bone_name = "Bone.011"
 bone_idx = 8
 
@@ -125,55 +166,51 @@ bone_idx = 8
 transform = Transform3D(0.482567, 1.39698e-08, 1.49012e-08, -2.32831e-10, 0.482567, 3.72529e-09, -1.49012e-08, 0, 0.482567, 0.00313222, 0.201879, 0.0060565)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Index_Tip/Area3D" index="0"]
-shape = SubResource("CapsuleShape3D_hkox5")
+transform = Transform3D(1, 1.02446e-07, 1.78814e-07, -1.02446e-07, 1, 2.12344e-07, -1.78814e-07, -2.12344e-07, 1, -0.0234386, 0.263736, 1.234e-07)
+shape = SubResource("CylinderShape3D_476bg")
+debug_color = Color(5.19812e-06, 0.639622, 0.361995, 0.42)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature_001/Skeleton3D/Index_Tip/Area3D" index="1"]
-mesh = SubResource("CapsuleMesh_o87j2")
-
-[node name="Middle_Base" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="8"]
-transform = Transform3D(-0.0679756, -0.997679, 0.00395178, 0.983772, -0.0663678, 0.166696, -0.166046, 0.0152189, 0.986, -0.682304, 0.0127306, -0.0044024)
+[node name="Mid_Base" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="8"]
+transform = Transform3D(-0.0679752, -0.997679, 0.00395176, 0.983772, -0.0663674, 0.166696, -0.166046, 0.0152188, 0.986, -0.682304, 0.0127324, -0.00440282)
 bone_name = "Bone.012"
 bone_idx = 10
 
-[node name="Area3D" type="Area3D" parent="Armature_001/Skeleton3D/Middle_Base" index="0"]
+[node name="Area3D" type="Area3D" parent="Armature_001/Skeleton3D/Mid_Base" index="0"]
 transform = Transform3D(0.700317, 1.86265e-09, 0, 9.31323e-10, 0.700317, 0, -7.45058e-09, -1.86265e-09, 0.700317, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Middle_Base/Area3D" index="0"]
-shape = SubResource("CapsuleShape3D_hkox5")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Mid_Base/Area3D" index="0"]
+transform = Transform3D(1, -5.98375e-08, 0, -2.32831e-10, 1, 2.79397e-09, -4.47035e-08, 3.56697e-07, 1, 0, 0.584717, 9.17353e-08)
+shape = SubResource("CylinderShape3D_px1ro")
+debug_color = Color(0.800462, 0.366733, 0.5429, 0.42)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature_001/Skeleton3D/Middle_Base/Area3D" index="1"]
-mesh = SubResource("CapsuleMesh_o87j2")
-
-[node name="Middle_Mid" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="9"]
-transform = Transform3D(-0.0965459, -0.99532, 0.00395177, 0.981465, -0.0945401, 0.166696, -0.165542, 0.0199723, 0.986, -1.48865, -0.0409096, 0.00789791)
+[node name="Mid_mid" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="9"]
+transform = Transform3D(-0.0965455, -0.995321, 0.00395175, 0.981465, -0.0945398, 0.166696, -0.165542, 0.0199722, 0.986, -1.48866, -0.0409075, 0.00789742)
 bone_name = "Bone.013"
 bone_idx = 11
 
-[node name="Area3D" type="Area3D" parent="Armature_001/Skeleton3D/Middle_Mid" index="0"]
+[node name="Area3D" type="Area3D" parent="Armature_001/Skeleton3D/Mid_mid" index="0"]
 transform = Transform3D(0.560895, 2.30502e-08, 0, -6.28643e-09, 0.560895, -3.72529e-09, -1.49012e-08, 0, 0.560895, -0.018661, 0.0876852, -0.00035429)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Middle_Mid/Area3D" index="0"]
-shape = SubResource("CapsuleShape3D_hkox5")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Mid_mid/Area3D" index="0"]
+transform = Transform3D(1, -3.0268e-09, 0, 2.32831e-09, 1, 0, -4.47035e-08, 0, 1, 0.0419421, 0.454163, -3.72529e-09)
+shape = SubResource("CylinderShape3D_srlbc")
+debug_color = Color(0.583038, 0.539565, 0.316379, 0.42)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature_001/Skeleton3D/Middle_Mid/Area3D" index="1"]
-mesh = SubResource("CapsuleMesh_o87j2")
-
-[node name="Middle_Tip" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="10"]
-transform = Transform3D(-0.0918276, -0.995767, 0.00395177, 0.981902, -0.0898875, 0.166696, -0.165635, 0.0191875, 0.986, -2.20636, -0.109081, 0.0222996)
+[node name="Mid_Tip" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="10"]
+transform = Transform3D(-0.0918272, -0.995767, 0.00395175, 0.981902, -0.0898872, 0.166696, -0.165635, 0.0191874, 0.986, -2.20636, -0.109078, 0.022299)
 bone_name = "Bone.014"
 bone_idx = 12
 
-[node name="Area3D" type="Area3D" parent="Armature_001/Skeleton3D/Middle_Tip" index="0"]
-transform = Transform3D(0.482567, 1.36206e-08, 2.98023e-08, 2.56114e-09, 0.482567, 2.79397e-09, -2.23517e-08, 9.31323e-10, 0.482567, -0.0102103, 0.057194, 0.00663069)
+[node name="Area3D" type="Area3D" parent="Armature_001/Skeleton3D/Mid_Tip" index="0"]
+transform = Transform3D(0.482567, 1.39698e-08, 1.49012e-08, -2.32831e-10, 0.482567, 3.72529e-09, -1.49012e-08, 0, 0.482567, 0.00313222, 0.201879, 0.0060565)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Middle_Tip/Area3D" index="0"]
-shape = SubResource("CapsuleShape3D_hkox5")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature_001/Skeleton3D/Middle_Tip/Area3D" index="1"]
-mesh = SubResource("CapsuleMesh_o87j2")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Mid_Tip/Area3D" index="0"]
+transform = Transform3D(1, -6.98492e-10, 8.79169e-07, 1.04541e-07, 1, -9.68575e-08, 1.63913e-07, -2.04891e-08, 1, 8.9407e-08, 0.065496, -5.21541e-08)
+shape = SubResource("CylinderShape3D_44ffw")
+debug_color = Color(0.213557, 0.629416, 0.335182, 0.42)
 
 [node name="Ring_Base" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="11"]
-transform = Transform3D(-0.423523, -0.905877, 0.00395187, 0.893488, -0.417004, 0.166695, -0.149357, 0.0741302, 0.986, -0.450963, -0.460036, 0.0745974)
+transform = Transform3D(-0.423523, -0.905877, 0.00395186, 0.893488, -0.417003, 0.166695, -0.149357, 0.0741302, 0.986, -0.450964, -0.460035, 0.0745971)
 bone_name = "Bone.015"
 bone_idx = 14
 
@@ -181,13 +218,12 @@ bone_idx = 14
 transform = Transform3D(0.700317, 1.86265e-09, 0, 9.31323e-10, 0.700317, 0, -7.45058e-09, -1.86265e-09, 0.700317, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Ring_Base/Area3D" index="0"]
-shape = SubResource("CapsuleShape3D_hkox5")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature_001/Skeleton3D/Ring_Base/Area3D" index="1"]
-mesh = SubResource("CapsuleMesh_o87j2")
+transform = Transform3D(1, -4.88013e-07, 1.49012e-08, -1.39698e-08, 1, 0, 0, 1.04308e-07, 1, 2.98023e-08, 0.567627, 2.98023e-08)
+shape = SubResource("CylinderShape3D_8hx3h")
+debug_color = Color(0.875049, 0.257297, 0.584366, 0.42)
 
 [node name="Ring_Mid" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="12"]
-transform = Transform3D(-0.448915, -0.893566, 0.00395185, 0.881366, -0.442049, 0.166695, -0.147206, 0.0783151, 0.986, -1.12376, -0.769744, 0.129654)
+transform = Transform3D(-0.448915, -0.893566, 0.00395183, 0.881366, -0.442048, 0.166695, -0.147206, 0.078315, 0.986, -1.12376, -0.769742, 0.129653)
 bone_name = "Bone.016"
 bone_idx = 15
 
@@ -195,28 +231,25 @@ bone_idx = 15
 transform = Transform3D(0.560895, 2.30502e-08, 0, -6.28643e-09, 0.560895, -3.72529e-09, -1.49012e-08, 0, 0.560895, -0.018661, 0.0876852, -0.00035429)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Ring_Mid/Area3D" index="0"]
-shape = SubResource("CapsuleShape3D_hkox5")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature_001/Skeleton3D/Ring_Mid/Area3D" index="1"]
-mesh = SubResource("CapsuleMesh_o87j2")
+transform = Transform3D(1, -2.8871e-08, 2.38419e-07, 1.49012e-08, 0.999999, 2.98023e-08, 0, -1.49012e-08, 0.999998, 0.0309179, 0.409424, 1.04308e-07)
+shape = SubResource("CylinderShape3D_k741v")
+debug_color = Color(0.623737, 0.529822, 0.154343, 0.42)
 
 [node name="Ring_Tip" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="13"]
-transform = Transform3D(-0.455097, -0.890433, 0.00395187, 0.878281, -0.448147, 0.166695, -0.14666, 0.0793335, 0.986, -1.65865, -1.03436, 0.176534)
+transform = Transform3D(-0.455097, -0.890433, 0.00395185, 0.878281, -0.448147, 0.166695, -0.14666, 0.0793334, 0.986, -1.65865, -1.03436, 0.176534)
 bone_name = "Bone.017"
 bone_idx = 16
 
 [node name="Area3D" type="Area3D" parent="Armature_001/Skeleton3D/Ring_Tip" index="0"]
-transform = Transform3D(0.482567, 1.36206e-08, 2.98023e-08, 2.56114e-09, 0.482567, 2.79397e-09, -2.23517e-08, 9.31323e-10, 0.482567, -0.0102103, 0.057194, 0.00663069)
+transform = Transform3D(0.482567, 1.39698e-08, 1.49012e-08, -2.32831e-10, 0.482567, 3.72529e-09, -1.49012e-08, 0, 0.482567, 0.00313222, 0.201879, 0.0060565)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Ring_Tip/Area3D" index="0"]
-shape = SubResource("CapsuleShape3D_hkox5")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature_001/Skeleton3D/Ring_Tip/Area3D" index="1"]
-mesh = SubResource("CapsuleMesh_o87j2")
-surface_material_override/0 = SubResource("StandardMaterial3D_77sws")
+transform = Transform3D(1, -1.19957e-06, -5.81157e-07, 1.19957e-06, 1, 2.38428e-07, 5.81157e-07, -2.38428e-07, 1, -1.16229e-06, 0.0878305, 2.98023e-08)
+shape = SubResource("CylinderShape3D_pamkq")
+debug_color = Color(0.150263, 0.638556, 0.274393, 0.42)
 
 [node name="Little_Base" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="14"]
-transform = Transform3D(-0.639495, -0.768785, 0.00395172, 0.758455, -0.630046, 0.166696, -0.125663, 0.109598, 0.986, -0.0203169, -0.830772, 0.135549)
+transform = Transform3D(-0.639495, -0.768785, 0.00395171, 0.758456, -0.630045, 0.166696, -0.125663, 0.109598, 0.986, -0.0203177, -0.83077, 0.135549)
 bone_name = "Bone.018"
 bone_idx = 18
 
@@ -224,10 +257,35 @@ bone_idx = 18
 transform = Transform3D(0.700317, 1.86265e-09, 0, 9.31323e-10, 0.700317, 0, -7.45058e-09, -1.86265e-09, 0.700317, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Little_Base/Area3D" index="0"]
-shape = SubResource("CapsuleShape3D_hkox5")
+transform = Transform3D(1, 1.30385e-08, 1.56462e-07, -2.04891e-08, 1, 1.19209e-07, -1.49012e-08, 0, 1, 4.76837e-07, 0.422791, 7.45058e-08)
+shape = SubResource("CylinderShape3D_vi05g")
+debug_color = Color(0.908848, 0.216411, 0.524658, 0.42)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature_001/Skeleton3D/Little_Base/Area3D" index="1"]
-mesh = SubResource("CapsuleMesh_o87j2")
+[node name="Little_Mid" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="15"]
+transform = Transform3D(-0.600522, -0.799598, 0.00395193, 0.788812, -0.591598, 0.166695, -0.130951, 0.103222, 0.986, -0.476525, -1.20465, 0.200586)
+bone_name = "Bone.019"
+bone_idx = 19
+
+[node name="Area3D" type="Area3D" parent="Armature_001/Skeleton3D/Little_Mid" index="0"]
+transform = Transform3D(0.560895, 2.30502e-08, 0, -6.28643e-09, 0.560895, -3.72529e-09, -1.49012e-08, 0, 0.560895, -0.018661, 0.0876852, -0.00035429)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Little_Mid/Area3D" index="0"]
+transform = Transform3D(1, 5.58794e-09, 1.51992e-06, 9.31323e-09, 1, 1.99676e-06, 0, 1.04308e-07, 1, 0.0346951, 0.287108, 5.96046e-08)
+shape = SubResource("CylinderShape3D_bja3q")
+debug_color = Color(0.596158, 0.54366, 0.107421, 0.42)
+
+[node name="Little_Tip" type="BoneAttachment3D" parent="Armature_001/Skeleton3D" index="16"]
+transform = Transform3D(-0.645446, -0.763795, 0.00395181, 0.75354, -0.635917, 0.166695, -0.124808, 0.110571, 0.986, -0.818555, -1.45771, 0.244739)
+bone_name = "Bone.020"
+bone_idx = 20
+
+[node name="Area3D" type="Area3D" parent="Armature_001/Skeleton3D/Little_Tip" index="0"]
+transform = Transform3D(0.482567, 1.39698e-08, 1.49012e-08, -2.32831e-10, 0.482567, 3.72529e-09, -1.49012e-08, 0, 0.482567, 0.00313222, 0.201879, 0.0060565)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature_001/Skeleton3D/Little_Tip/Area3D" index="0"]
+transform = Transform3D(1, -1.92784e-07, 1.44541e-06, 4.06988e-07, 1, 1.49012e-06, -8.49366e-07, 7.45058e-08, 0.999999, 0, 0.0245368, -4.17233e-07)
+shape = SubResource("CylinderShape3D_4ao4k")
+debug_color = Color(0.17082, 0.631151, 0.370021, 0.42)
 
 [node name="AnimationPlayer" parent="." index="1"]
 autoplay = "Hand_Idle"

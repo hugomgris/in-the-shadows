@@ -105,15 +105,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
 			var state = bone_data[dragging_bone]
 			state.target_rot.x = clamp(state.target_rot.x - curl_step, min_rotation_x, max_rotation_x)
-	
-	# Debug keyboard shortcuts
-	elif event is InputEventKey and event.pressed:
-		if event.keycode == KEY_R:
-			reset_all_bones()
-		elif event.keycode == KEY_P:
-			reset_pinky()
-		elif event.keycode == KEY_D:
-			debug_pinky()
 
 func _process(delta: float) -> void:
 	# Update all bones
@@ -123,50 +114,28 @@ func _process(delta: float) -> void:
 
 func _update_bone(bone_name: String, state: BoneState, delta: float):
 	# Organic rotation interpolation with velocity and damping
-	if dragging_bone == bone_name:
-		# When actively dragging this bone, interpolate toward target rotation
-		var force = (state.target_rot - state.current_rot) * spring_factor
-		state.velocity_rot += force
-		state.velocity_rot *= damping_factor
-		state.current_rot += state.velocity_rot * delta * 60.0
-	else:
-		# When not dragging this bone, keep scroll wheel rotations but reduce spring force
-		var rest_target = state.target_rot  # Keep scroll wheel rotations persistent
-		var rest_force = (rest_target - state.current_rot) * spring_factor
-		state.velocity_rot += rest_force
-		state.velocity_rot *= damping_factor
-		state.current_rot += state.velocity_rot * delta * 60.0
+	# Note: We always interpolate toward target_rot, regardless of dragging state
+	# This allows scroll wheel curls to persist when dragging stops
+	var force = (state.target_rot - state.current_rot) * spring_factor
+	state.velocity_rot += force
+	state.velocity_rot *= damping_factor
+	state.current_rot += state.velocity_rot * delta * 60.0
 	
-	# Organic curl interpolation - only apply curl to draggable bones when being dragged
-	if bone_name in draggable_bones:
-		var curl_force = (state.target_curl - state.curl_angle) * spring_factor
-		state.curl_velocity += curl_force
-		state.curl_velocity *= damping_factor
-		state.curl_angle += state.curl_velocity * delta * 60.0
-	else:
-		# For non-draggable bones, gradually return curl to zero
-		var curl_force = (0.0 - state.curl_angle) * spring_factor * 0.5
-		state.curl_velocity += curl_force
-		state.curl_velocity *= damping_factor
-		state.curl_angle += state.curl_velocity * delta * 60.0
+	# Organic curl interpolation - reduced spring factor for less bounce
+	var curl_force = (state.target_curl - state.curl_angle) * spring_factor
+	state.curl_velocity += curl_force
+	state.curl_velocity *= damping_factor
+	state.curl_angle += state.curl_velocity * delta * 60.0
 	
 	# Apply to skeleton
 	var rest_transform = get_bone_rest(state.bone_idx)
 	
-	# Create rotation matrices - try different axes for different bone types
+	# Create rotation matrices
 	var scroll_basis = Basis()
-	var curl_basis = Basis()
+	scroll_basis = scroll_basis.rotated(Vector3.RIGHT, state.current_rot.x)
 	
-	# Special handling for pinky bones that might have different orientations
-	if bone_name.begins_with("Bone.018") or bone_name.begins_with("Bone.019") or bone_name.begins_with("Bone.020"):
-		# For pinky bones, try adjusting the rotation axes
-		# The pinky might need different rotation axes due to its steeper angle
-		scroll_basis = scroll_basis.rotated(Vector3.RIGHT, state.current_rot.x)
-		curl_basis = curl_basis.rotated(Vector3.UP, state.curl_angle)  # Try Y-axis instead of Z-axis
-	else:
-		# Standard rotation for other fingers
-		scroll_basis = scroll_basis.rotated(Vector3.RIGHT, state.current_rot.x)
-		curl_basis = curl_basis.rotated(Vector3.FORWARD, state.curl_angle)
+	var curl_basis = Basis()
+	curl_basis = curl_basis.rotated(Vector3.FORWARD, state.curl_angle)
 	
 	var new_transform = rest_transform
 	new_transform.basis = rest_transform.basis * scroll_basis * curl_basis
@@ -187,24 +156,7 @@ func reset_bone(bone_name: String):
 	state.curl_velocity = 0.0
 	
 	set_bone_pose(state.bone_idx, get_bone_rest(state.bone_idx))
-	print("Reset bone: ", bone_name)
 
 func reset_all_bones():
 	for bone_name in bone_data.keys():
 		reset_bone(bone_name)
-
-func reset_pinky():
-	reset_bone("Bone.018")
-	reset_bone("Bone.019") 
-	reset_bone("Bone.020")
-	print("Reset pinky finger")
-
-func debug_pinky():
-	for bone_name in ["Bone.018", "Bone.019", "Bone.020"]:
-		if bone_data.has(bone_name):
-			var state = bone_data[bone_name]
-			var rest_transform = get_bone_rest(state.bone_idx)
-			print("Bone ", bone_name, ":")
-			print("  Rest transform: ", rest_transform)
-			print("  Current target_rot: ", state.target_rot)
-			print("  Current curl: ", state.curl_angle)
