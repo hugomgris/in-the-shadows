@@ -43,6 +43,11 @@ func _ready():
 	setup_bone_attachments()
 	set_process_unhandled_input(true)
 
+	# Level manager connection
+	if LevelManager:
+		LevelManager.set_skeleton_controller(self)
+		print("Connected to global LevelManager")
+
 func setup_bone_attachments():
 	var bone_attachments = find_children("*", "BoneAttachment3D")
 
@@ -117,6 +122,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		if _has_dragged:
 			_handle_bone_drag(delta_mouse)
+
+	#Level creation key binds
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_P:
+			LevelManager.record_current_pose()
+		elif event.keycode == KEY_L:
+			LevelManager.load_all_poses()
+		elif event.keycode == KEY_S:
+			LevelManager.save_recorded_poses()
+		elif event.keycode == KEY_T:
+			LevelManager.test_current_pose()
+		elif event.keycode == KEY_R:
+			reset_all_bones()
 
 func _handle_bone_click():
 	"""Handle click-based finger curling (X-axis rotation)"""
