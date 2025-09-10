@@ -84,9 +84,9 @@ func _process(delta):
 		current_state = current_node
 		animation_state_changed.emit(current_state)
 
-	# Debug output
-	if Engine.get_process_frames() % 120 == 0:  # Every 2 seconds
-		print("Animation status - Current: ", current_node, " Playing: ", is_playing)
+	# Debug output (commented out for production)
+	# if Engine.get_process_frames() % 120 == 0:  # Every 2 seconds
+	#	print("Animation status - Current: ", current_node, " Playing: ", is_playing)
 
 func _on_intro_finished():
 	"""Handle intro completion"""
@@ -96,7 +96,6 @@ func _on_intro_finished():
 
 	#Transition to idle
 	state_machine.travel("Hand_Idle")
-	animation_state_changed.emit("Hand_Idle")
 	intro_finished.emit()
 
 # Debug

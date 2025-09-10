@@ -57,7 +57,6 @@ func setup_input_handling():
 		var bone_id = skeleton.find_bone(bone_name)
 		if bone_id != -1:
 			_create_bone_modification(bone_id)
-			print("Setup input modification for bone: ", bone_name, " (ID: ", bone_id, ")")
 
 func _create_bone_modification(bone_id: int):
 	"""Create a bone modification entry for the given bone ID"""
@@ -68,7 +67,6 @@ func _create_bone_modification(bone_id: int):
 func enable_input():
 	"""Enable input handling (called after intro finishes)"""
 	_input_enabled = true
-	print("HandInputModifier: Input enabled")
 
 func disable_input():
 	"""Disable input handling"""
@@ -90,8 +88,6 @@ func capture_rest_poses():
 		mod.target_rotation = Vector3.ZERO
 		mod.current_rotation = Vector3.ZERO
 		mod.velocity_rotation = Vector3.ZERO
-	
-	print("HandInputModifier: Captured rest poses after intro")
 
 func _process_modification():
 	"""Apply bone modifications (runs after AnimationTree)"""
@@ -149,10 +145,8 @@ func handle_mouse_input(event: InputEvent):
 		var delta_mouse = event.position - last_mouse_pos
 		last_mouse_pos = event.position
 		
-		# Only consider it dragging if we've moved enough AND we're not just starting
-		if delta_mouse.length() > _drag_threshold:
-			if not _has_dragged:
-				print("Started dragging with delta: ", delta_mouse.length())
+		# Only consider it dragging if we've moved enough
+		if delta_mouse.length() > _drag_threshold and not _has_dragged:
 			_has_dragged = true
 			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		
@@ -177,13 +171,10 @@ func _start_bone_interaction() -> bool:
 	_has_dragged = false
 	_mouse_pressed_time = Time.get_unix_time_from_system()
 	
-	print("Mouse pressed on bone ID: ", current_bone_id, " at time: ", _mouse_pressed_time)
-	
 	# Get mouse position from the viewport
 	var viewport = get_viewport()
 	if viewport:
 		last_mouse_pos = viewport.get_mouse_position()
-		print("Starting mouse position: ", last_mouse_pos)
 	else:
 		last_mouse_pos = Vector2.ZERO
 		
@@ -196,15 +187,9 @@ func _end_bone_interaction() -> bool:
 	
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
-	# Debug output
-	print("Mouse released - Click time: ", click_time, " Has dragged: ", _has_dragged, " Threshold: ", _click_threshold)
-	
 	# Handle click if it was quick and no significant drag occurred
 	if click_time < _click_threshold and not _has_dragged:
-		print("Detected click! Calling _handle_bone_click()")
 		_handle_bone_click()
-	else:
-		print("Not a click - either too slow (", click_time, " >= ", _click_threshold, ") or dragged (", _has_dragged, ")")
 	
 	current_bone_id = -1
 	_is_dragging = false
@@ -214,27 +199,17 @@ func _end_bone_interaction() -> bool:
 
 func _handle_bone_click():
 	"""Handle click-based finger curling (X-axis rotation)"""
-	print("_handle_bone_click called for bone ID: ", current_bone_id)
-	
 	if not bone_modifications.has(current_bone_id):
-		print("Error: bone_modifications doesn't have bone ID: ", current_bone_id)
 		return
 		
 	var mod = bone_modifications[current_bone_id]
-	print("Current target rotation X: ", rad_to_deg(mod.target_rotation.x), " degrees")
 	
 	if mod.target_rotation.x >= deg_to_rad(max_rotation_x - 5.0):  # Near max curl
 		mod.target_rotation.x = deg_to_rad(min_rotation_x)  # Reset to extended
-		print("Resetting to extended position")
 	else:
 		mod.target_rotation.x += deg_to_rad(click_curl_step)  # Curl more
 		mod.target_rotation.x = clamp(mod.target_rotation.x, 
 			deg_to_rad(min_rotation_x), deg_to_rad(max_rotation_x))
-		print("Curling more, new target: ", rad_to_deg(mod.target_rotation.x), " degrees")
-	
-	var skeleton = get_skeleton()
-	if skeleton:
-		print("Successfully curling bone ", skeleton.get_bone_name(current_bone_id), " to ", rad_to_deg(mod.target_rotation.x), " degrees")
 
 func _handle_bone_drag(delta_mouse: Vector2):
 	"""Handle drag-based sideways movement (Z-axis rotation)"""
@@ -256,10 +231,6 @@ func _handle_bone_drag(delta_mouse: Vector2):
 			deg_to_rad(min_rotation_z), deg_to_rad(max_rotation_z))
 		
 		mod.velocity_rotation.z *= 0.5
-		
-		print("Dragging bone ", bone_name, " - Z rotation: ", rad_to_deg(mod.target_rotation.z), " degrees")
-	else:
-		print("Bone ", bone_name, " is not draggable - only clicking allowed")
 
 func set_bone_hovered(bone_id: int):
 	"""Set which bone is currently hovered"""

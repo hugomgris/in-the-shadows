@@ -6,11 +6,7 @@ extends Skeleton3D
 @onready var hand_input_modifier: HandInputModifier
 
 var bone_data := {}
-var hovered_bone_id := -1
-
 var _input_enabled := false
-
-var draggable_bones = ["Bone.001", "Bone.007", "Bone.009", "Bone.012", "Bone.015", "Bone.018"]
 
 class BoneState:
 	var bone_id: int
@@ -113,14 +109,13 @@ func setup_bone_attachments():
 
 func _on_bone_hovered(bone_id: int):
 	"""Called when HandInputModifier detects bone hover"""
-	hovered_bone_id = bone_id
-	print("Mouse entered bone: ", get_bone_name(bone_id))
+	# Could add visual feedback here if needed
+	pass
 
 func _on_bone_unhovered(bone_id: int):
-	"""Called when HandInputModifier detects bone unhover"""
-	if hovered_bone_id == bone_id:
-		hovered_bone_id = -1
-	print("Mouse exited bone: ", get_bone_name(bone_id))
+	"""Called when HandInputModifier detects bone unhover"""  
+	# Could add visual feedback here if needed
+	pass
 
 func _on_bone_area_mouse_entered(bone_id: int):
 	"""Handle bone area mouse enter events"""
