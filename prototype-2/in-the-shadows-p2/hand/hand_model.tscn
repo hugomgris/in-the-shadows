@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://bxh7rwaed0eb2"]
+[gd_scene load_steps=28 format=3 uid="uid://bxh7rwaed0eb2"]
 
 [ext_resource type="PackedScene" uid="uid://dayey43gflnbk" path="res://hand/hand_model.glb" id="1_hkox5"]
 [ext_resource type="Script" uid="uid://bmn5a6g8jaxdr" path="res://hand/skelleton_controller.gd" id="2_o87j2"]
 [ext_resource type="Shader" uid="uid://bex80yesxkb7p" path="res://shaders/hand.gdshader" id="3_5jb37"]
 [ext_resource type="Texture2D" uid="uid://bcedkkbrsj431" path="res://shaders/color_gradient.tres" id="4_77sws"]
+[ext_resource type="Script" uid="uid://bwgtglwr2n6mq" path="res://hand/animation_controller.gd" id="5_77sws"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hmrq0"]
 height = 0.529297
@@ -73,6 +74,28 @@ render_priority = 0
 shader = ExtResource("3_5jb37")
 shader_parameter/albedo = Color(0.120267, 0.547886, 0.862361, 1)
 shader_parameter/color_gradient = ExtResource("4_77sws")
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5jb37"]
+animation = &"Hand_Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_77sws"]
+animation = &"intro_left"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_77sws"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5jb37"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_px1ro"]
+states/End/position = Vector2(930.667, 220.741)
+states/Hand_Idle/node = SubResource("AnimationNodeAnimation_5jb37")
+states/Hand_Idle/position = Vector2(742.889, 222)
+states/Start/position = Vector2(546.667, 152.667)
+states/intro_left/node = SubResource("AnimationNodeAnimation_77sws")
+states/intro_left/position = Vector2(742.667, 99.3333)
+transitions = ["intro_left", "Hand_Idle", SubResource("AnimationNodeStateMachineTransition_77sws"), "Start", "intro_left", SubResource("AnimationNodeStateMachineTransition_5jb37")]
 
 [node name="Hand_Model" instance=ExtResource("1_hkox5")]
 
@@ -301,5 +324,12 @@ surface_material_override/0 = SubResource("ShaderMaterial_5jb37")
 [node name="Sleeve_002" parent="Armature_001/Skeleton3D" index="16"]
 surface_material_override/0 = SubResource("ShaderMaterial_77sws")
 
-[node name="AnimationPlayer" parent="." index="1"]
-autoplay = "intro_left"
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+unique_name_in_owner = true
+root_node = NodePath("%AnimationTree/..")
+tree_root = SubResource("AnimationNodeStateMachine_px1ro")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationController" type="Node" parent="." index="3"]
+unique_name_in_owner = true
+script = ExtResource("5_77sws")

@@ -15,12 +15,14 @@ extends Skeleton3D
 
 @onready var area_3d: Area3D = %Area3D
 @onready var skeleton_3d: Skeleton3D = %Skeleton3D
+@onready var animation_controller: AnimationController = %AnimationController
 
 var bone_data := {}
 var current_bone_id := -1
 var hovered_bone_id := -1
 var last_mouse_pos: Vector2
 
+var _input_enabled := false
 var _is_dragging := false
 var _has_dragged := false
 var _mouse_pressed_time := 0
@@ -41,6 +43,10 @@ class BoneState:
 func _ready():
 	print("Skeleton controller initialized with ", get_bone_count(), " bones")
 	setup_bone_attachments()
+	
+	setup_animation_connection()
+	_input_enabled = false
+
 	set_process_unhandled_input(true)
 
 	# Level manager connection
@@ -48,6 +54,51 @@ func _ready():
 		LevelManager.set_skeleton_controller(self)
 		print("Connected to global LevelManager")
 
+# Animation related management
+func setup_animation_connection():
+	"""Connect to the animation controller"""
+	if animation_controller:
+		# Make animation event connections
+		animation_controller.intro_finished.connect(_on_intro_finished)
+		animation_controller.animation_state_changed.connect(_on_animation_state_changed)
+
+		animation_controller.play_intro()
+		print("Connected to Animation Controller and started intro")
+	else:
+		push_error("Animation Controller not found!")
+
+func _on_intro_finished():
+	"""Called when intro animation completes (connected to signal)"""
+	print("Intro finished - enabling input")
+
+	# Capture final bone states frm intro
+	capture_intro_final_states()
+
+	_input_enabled = true
+	set_process_unhandled_input(true)
+
+	print("Hand ready for interaction")
+
+func _on_animation_state_changed(new_state: String):
+	"""Called when animation state changes (connected to signal)"""
+	print("Animation state changed to: ", new_state)
+
+func capture_intro_final_states():
+	"""Capture the final bone states from intro animation"""
+	print("Capturing final intro states...")
+
+	for bone_id in bone_data.keys():
+		var state = bone_data[bone_id]
+
+		# Reset internal rotations to zero (relative to current pose)
+		state.target_rotation = Vector3.ZERO
+		state.current_rotation = Vector3.ZERO
+		state.velocity_rotation = Vector3.ZERO
+
+		# Store the current animated pose as the new "rest" pose
+		state.initial_rotation = get_bone_pose_rotation(bone_id)
+
+# Input/Bone related management
 func setup_bone_attachments():
 	var bone_attachments = find_children("*", "BoneAttachment3D")
 
@@ -82,6 +133,9 @@ func _on_bone_area_mouse_exited(bone_id: int):
 	print("Mouse exited bone: ", get_bone_name(bone_id))
 
 func _unhandled_input(event: InputEvent) -> void:
+	if not _input_enabled or (animation_controller and animation_controller.is_intro_playing):
+		return
+	
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed and hovered_bone_id != -1:
@@ -151,6 +205,7 @@ func _handle_bone_click():
 			deg_to_rad(min_rotation_x), deg_to_rad(max_rotation_x))
 	
 	print("Curling bone ", get_bone_name(current_bone_id), " to ", rad_to_deg(state.target_rotation.x), " degrees")
+	print("Target rotation set to: ", state.target_rotation)
 
 func _handle_bone_drag(delta_mouse: Vector2):
 	"""Handle drag-based sideways movement (Z-axis rotation)"""
@@ -167,24 +222,69 @@ func _handle_bone_drag(delta_mouse: Vector2):
 			deg_to_rad(min_rotation_z), deg_to_rad(max_rotation_z))
 		
 		state.velocity_rotation.z *= 0.5
+		
+		print("Dragging bone ", bone_name, " - Z rotation: ", rad_to_deg(state.target_rotation.z), " degrees")
+	else:
+		print("Bone ", bone_name, " is not draggable")
 
 func _physics_process(delta: float) -> void:
+	# Update spring physics for all bones
 	for bone_id in bone_data.keys():
 		_update_bone_with_springs(bone_id, delta)
 
+func _process(delta: float) -> void:
+	"""Force manual bone control AFTER animation system updates"""
+	if _input_enabled and animation_controller and not animation_controller.is_intro_playing:
+		# Apply manual control AFTER animation tree has updated
+		_apply_manual_bone_control()
+
 func _update_bone_with_springs(bone_id: int, delta: float):
-	"""Update bone rotation using spring physics for organic movement"""
+	"""Calculate spring physics for bone movement (doesn't apply yet)"""
 	var state = bone_data[bone_id]
+
+	# During intro, let animation handle everything
+	if animation_controller and animation_controller.is_intro_playing:
+		return
 	
+	# Calculate the target rotation using spring physics
 	var force = (state.target_rotation - state.current_rotation) * spring_factor
 	state.velocity_rotation += force
 	state.velocity_rotation *= damping_factor
 	state.current_rotation += state.velocity_rotation * delta * 60.0
+
+func _apply_manual_bone_control():
+	"""Force apply manual bone rotations, overriding animation system"""
+	var applied_count = 0
 	
-	var rotation_quat = Quaternion.from_euler(state.current_rotation)
-	var final_rotation = state.initial_rotation * rotation_quat
+	# Check if AnimationTree is still active
+	var animation_tree_active = animation_controller and animation_controller.animation_tree and animation_controller.animation_tree.active
 	
-	set_bone_pose_rotation(bone_id, final_rotation)
+	for bone_id in bone_data.keys():
+		var bone_name = get_bone_name(bone_id)
+		var state = bone_data[bone_id]
+		
+		# If AnimationTree is disabled, apply manual control to ALL bones
+		# If AnimationTree is active, only apply to interactive bones with non-zero rotations
+		var should_apply = false
+		if not animation_tree_active:
+			# AnimationTree disabled - apply all manual rotations
+			should_apply = state.current_rotation.length() > 0.001
+		else:
+			# AnimationTree active - only override interactive bones
+			should_apply = bone_name in draggable_bones and state.current_rotation.length() > 0.01
+		
+		if should_apply:
+			var rotation_quat = Quaternion.from_euler(state.current_rotation)
+			var final_rotation = state.initial_rotation * rotation_quat
+			
+			# FORCE set the bone rotation
+			set_bone_pose_rotation(bone_id, final_rotation)
+			applied_count += 1
+	
+	# Debug output every 60 frames if we're applying manual control
+	if applied_count > 0 and Engine.get_process_frames() % 60 == 0:
+		var tree_status = "active" if animation_tree_active else "disabled"
+		print("Applying manual control to ", applied_count, " bones (AnimationTree: ", tree_status, ")")
 
 func reset_bone(bone_id: int):
 	"""Reset a specific bone to its initial state"""
