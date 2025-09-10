@@ -42,9 +42,12 @@ func create_pose_target(pose_name: String) -> PoseTarget:
 	"""Create a PoseTarget from current skeleton state"""
 	var target = PoseTarget.new(pose_name)
 
-	for bone_id in skeleton_controller.bone_data.keys():
+	# Get bone data from the skeleton controller (which uses HandInputModifier)
+	var bone_data = skeleton_controller.get_bone_data()
+	
+	for bone_id in bone_data.keys():
 		var bone_name = skeleton_controller.get_bone_name(bone_id)
-		var state = skeleton_controller.bone_data[bone_id]
+		var state = bone_data[bone_id]
 		target.bone_rotations[bone_name] = state.current_rotation
 		target.required_bones.append(bone_name)
 
@@ -152,12 +155,15 @@ func check_pose_match(target: PoseTarget) -> float:
 	var total_bones = target.required_bones.size();
 	var matched_bones = 0
 
+	# Get bone data from the skeleton controller (which uses HandInputModifier)
+	var bone_data = skeleton_controller.get_bone_data()
+
 	for bone_name in target.required_bones:
 		var bone_id = skeleton_controller.find_bone(bone_name)
-		if bone_id == -1 or not skeleton_controller.bone_data.has(bone_id):
+		if bone_id == -1 or not bone_data.has(bone_id):
 			continue
 		
-		var current_rot = skeleton_controller.bone_data[bone_id].current_rotation
+		var current_rot = bone_data[bone_id].current_rotation
 		var target_rot = target.bone_rotations.get(bone_name, Vector3.ZERO)
 
 		#Check within tolerance (degrees)
@@ -276,3 +282,24 @@ func get_pose_by_name(pose_name: String) -> PoseTarget:
 			return pose
 	
 	return null
+
+func apply_pose(pose: PoseTarget):
+	"""Apply a pose to the current skeleton"""
+	if not skeleton_controller:
+		push_error("No skeleton controller connected!")
+		return
+	
+	# Create bone data in the format expected by the skeleton controller
+	var bone_data = {}
+	
+	for bone_name in pose.bone_rotations.keys():
+		var bone_id = skeleton_controller.find_bone(bone_name)
+		if bone_id != -1:
+			bone_data[bone_id] = {
+				"target_rotation": pose.bone_rotations[bone_name],
+				"current_rotation": pose.bone_rotations[bone_name]
+			}
+	
+	# Apply the pose data through the skeleton controller
+	skeleton_controller.set_bone_data(bone_data)
+	print("Applied pose: ", pose.name)
