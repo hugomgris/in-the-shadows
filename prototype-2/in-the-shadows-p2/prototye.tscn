@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://chdfvrnjy4hn3"]
 
-[ext_resource type="PackedScene" uid="uid://c8d215ltj8qas" path="res://hand/hand.tscn" id="1_4xnev"]
 [ext_resource type="Shader" uid="uid://bex80yesxkb7p" path="res://shaders/hand.gdshader" id="2_46o83"]
 [ext_resource type="Texture2D" uid="uid://bcedkkbrsj431" path="res://shaders/color_gradient.tres" id="3_exge7"]
 [ext_resource type="Script" uid="uid://h1g70xo3rodw" path="res://camera_controller.gd" id="4_exge7"]
+[ext_resource type="PackedScene" uid="uid://bf5jw8yyjwqjc" path="res://hand/hand_v_2.tscn" id="5_4kmpq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4kmpq"]
 render_priority = 0
@@ -12,8 +12,6 @@ shader_parameter/albedo = Color(0.991606, 0.502855, 0.901888, 1)
 shader_parameter/color_gradient = ExtResource("3_exge7")
 
 [node name="Node3D" type="Node3D"]
-
-[node name="Hand" parent="." instance=ExtResource("1_4xnev")]
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.686454, 0.236004, -5.17971)
@@ -33,7 +31,7 @@ omni_range = 5.837
 omni_attenuation = 0.118
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(8.09015, 0, 0, 0, 8.09015, 0, 0, 0, 8.09015, 11.8874, -15.4738, 18.7266)
+transform = Transform3D(8.09015, 0, 0, 0, 8.09015, 0, 0, 0, 8.09015, 11.8466, -15.4738, 18.7426)
 material_override = SubResource("ShaderMaterial_4kmpq")
 size = Vector3(9.80676, 15.3548, 1.2998)
 
@@ -41,3 +39,6 @@ size = Vector3(9.80676, 15.3548, 1.2998)
 transform = Transform3D(-0.940733, 0, -0.339148, 0, 1, 0, 0.339148, 0, -0.940733, -4.77466, 0, -3.6327)
 fov = 60.1
 script = ExtResource("4_exge7")
+
+[node name="hand_v2" parent="." instance=ExtResource("5_4kmpq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1562, -0.430164, 0)

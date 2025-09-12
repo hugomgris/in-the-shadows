@@ -1,0 +1,332 @@
+[gd_scene load_steps=29 format=3 uid="uid://bf5jw8yyjwqjc"]
+
+[ext_resource type="PackedScene" uid="uid://k33vj3vxlg1e" path="res://hand/hand_v2.glb" id="1_0il1k"]
+[ext_resource type="Shader" uid="uid://bex80yesxkb7p" path="res://shaders/hand.gdshader" id="2_1w66s"]
+[ext_resource type="Script" uid="uid://dmhiavw3mrknq" path="res://hand/hand_input_modifier.gd" id="2_c0p7r"]
+[ext_resource type="Script" uid="uid://bmn5a6g8jaxdr" path="res://hand/skelleton_controller.gd" id="3_2wr4i"]
+[ext_resource type="Texture2D" uid="uid://bcedkkbrsj431" path="res://shaders/color_gradient.tres" id="3_m6yhs"]
+[ext_resource type="Script" uid="uid://bwgtglwr2n6mq" path="res://hand/animation_controller.gd" id="6_fqbse"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_op06l"]
+render_priority = 0
+shader = ExtResource("2_1w66s")
+shader_parameter/albedo = Color(0.881407, 0.574388, 0.397241, 1)
+shader_parameter/color_gradient = ExtResource("3_m6yhs")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fqbse"]
+render_priority = 0
+shader = ExtResource("2_1w66s")
+shader_parameter/albedo = Color(7.70092e-07, 0.592444, 0.888431, 1)
+shader_parameter/color_gradient = ExtResource("3_m6yhs")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fqbse"]
+height = 0.71051
+radius = 0.249512
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ahv5h"]
+height = 0.449631
+radius = 0.243164
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1104i"]
+height = 0.460312
+radius = 0.226562
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_l8r57"]
+height = 0.761963
+radius = 0.267578
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_i2sp4"]
+height = 0.560165
+radius = 0.258301
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qdb7t"]
+height = 0.587387
+radius = 0.246094
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bk8y5"]
+height = 0.72937
+radius = 0.265137
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_grjpy"]
+height = 0.538834
+radius = 0.253906
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_aygux"]
+height = 0.510986
+radius = 0.235352
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gn5i3"]
+height = 0.692078
+radius = 0.262695
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_3w0ci"]
+height = 0.416847
+radius = 0.239746
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pjc2j"]
+height = 0.40834
+radius = 0.241211
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2jlu6"]
+height = 0.421082
+radius = 0.32373
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hcehx"]
+height = 0.52179
+radius = 0.299805
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bidn5"]
+height = 0.864258
+radius = 0.834473
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1ysmg"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_am0rs"]
+animation = &"intro"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1w66s"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m6yhs"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_op06l"]
+states/idle/node = SubResource("AnimationNodeAnimation_1ysmg")
+states/idle/position = Vector2(357.333, 152)
+states/intro/node = SubResource("AnimationNodeAnimation_am0rs")
+states/intro/position = Vector2(357.333, 38)
+transitions = ["Start", "intro", SubResource("AnimationNodeStateMachineTransition_1w66s"), "intro", "idle", SubResource("AnimationNodeStateMachineTransition_m6yhs")]
+
+[node name="hand_v2" instance=ExtResource("1_0il1k")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+unique_name_in_owner = true
+bones/0/position = Vector3(6.00413, 0.981277, -0.0838894)
+bones/0/rotation = Quaternion(-0.0666662, 0.109872, 0.750145, 0.648665)
+bones/3/rotation = Quaternion(-0.0195353, -0.130345, 0.146925, 0.980327)
+bones/4/rotation = Quaternion(-8.6613e-08, 6.06524e-08, 2.6077e-07, 1)
+bones/7/rotation = Quaternion(-0.00438537, -0.0824214, 0.0529489, 0.99518)
+bones/8/rotation = Quaternion(2.14204e-08, -4.63333e-08, 1.86264e-09, 1)
+bones/9/rotation = Quaternion(-3.91155e-08, 5.07571e-08, 1.29919e-07, 1)
+bones/11/rotation = Quaternion(-0.00107954, 0.0225828, -0.0477332, 0.998604)
+script = ExtResource("3_2wr4i")
+
+[node name="Hand" parent="Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_op06l")
+
+[node name="Sleeve" parent="Armature/Skeleton3D" index="1"]
+surface_material_override/0 = SubResource("ShaderMaterial_fqbse")
+
+[node name="HandInputModifier" type="SkeletonModifier3D" parent="Armature/Skeleton3D" index="2"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+active = true
+influence = 1.0
+script = ExtResource("2_c0p7r")
+metadata/_custom_type_script = "uid://dmhiavw3mrknq"
+
+[node name="index_base" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="3"]
+transform = Transform3D(-0.149578, -0.987835, 0.0425212, 0.958536, -0.134323, 0.251327, -0.242558, 0.0783511, 0.966968, 0.0261139, 0.745511, 0.240264)
+bone_name = "Bone.014"
+bone_idx = 3
+
+[node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/index_base" index="0"]
+unique_name_in_owner = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/index_base/Area3D" index="0"]
+transform = Transform3D(1, -1.52364e-06, 2.83122e-07, 3.72529e-09, 0.999998, -2.01166e-07, -1.49012e-08, -6.70552e-08, 0.999997, 1.19209e-07, 0.274261, 3.57628e-07)
+shape = SubResource("CylinderShape3D_fqbse")
+debug_color = Color(0.227808, 0.509069, 1, 0.42)
+
+[node name="index_mid" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="4"]
+transform = Transform3D(-0.149578, -0.987835, 0.042521, 0.958536, -0.134324, 0.251327, -0.242558, 0.0783511, 0.966968, -0.550342, 0.667126, 0.285986)
+bone_name = "Bone.015"
+bone_idx = 4
+
+[node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/index_mid" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/index_mid/Area3D" index="0"]
+transform = Transform3D(1, -1.19209e-07, 7.45058e-08, 1.19209e-07, 1, 0, -7.45058e-08, 8.88179e-15, 1, 2.08616e-07, 0.27224, 2.98023e-08)
+shape = SubResource("CylinderShape3D_ahv5h")
+debug_color = Color(0.895662, 0.178246, 0.653258, 0.42)
+
+[node name="index_tip" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="5"]
+transform = Transform3D(-0.149578, -0.987835, 0.042521, 0.958536, -0.134323, 0.251327, -0.242558, 0.078351, 0.966967, -1.04401, 0.599999, 0.325142)
+bone_name = "Bone.016"
+bone_idx = 5
+
+[node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/index_tip" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/index_tip/Area3D" index="0"]
+transform = Transform3D(1, -1.19209e-07, 7.45058e-08, 1.52737e-07, 1, 6.70552e-08, -3.42727e-07, 1.49012e-08, 1, 0.00162774, 0.229667, 0.000476629)
+shape = SubResource("CylinderShape3D_1104i")
+debug_color = Color(2.64719e-06, 0.624767, 0.526143, 0.42)
+
+[node name="middle_base" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="6"]
+transform = Transform3D(-0.149578, -0.987835, 0.042521, 0.958536, -0.134323, 0.251328, -0.242559, 0.078351, 0.966967, 0.00285697, 0.374485, 0.337722)
+bone_name = "Bone.017"
+bone_idx = 7
+
+[node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/middle_base" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/middle_base/Area3D" index="0"]
+transform = Transform3D(1.00001, 8.9407e-08, 0, 2.99886e-07, 1, -1.49012e-08, -2.48849e-06, 6.70552e-08, 1, 2.98023e-08, 0.244507, -5.96046e-08)
+shape = SubResource("CylinderShape3D_l8r57")
+debug_color = Color(0.268125, 0.502142, 1, 0.42)
+
+[node name="middle_mid" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="7"]
+transform = Transform3D(-0.149578, -0.987835, 0.042521, 0.958536, -0.134323, 0.251327, -0.242559, 0.078351, 0.966967, -0.609242, 0.291254, 0.386271)
+bone_name = "Bone.018"
+bone_idx = 8
+
+[node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/middle_mid" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/middle_mid/Area3D" index="0"]
+transform = Transform3D(1, -4.44986e-06, 0, 1.86265e-09, 1, 0, -5.96046e-08, 2.83122e-07, 1, -1.46031e-06, 0.292351, -2.08616e-07)
+shape = SubResource("CylinderShape3D_i2sp4")
+debug_color = Color(0.929998, 3.01298e-05, 0.658519, 0.42)
+
+[node name="middle_tip" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="8"]
+transform = Transform3D(-0.149578, -0.987835, 0.0425209, 0.958536, -0.134323, 0.251328, -0.242559, 0.078351, 0.966967, -1.22777, 0.207148, 0.43533)
+bone_name = "Bone.019"
+bone_idx = 9
+
+[node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/middle_tip" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/middle_tip/Area3D" index="0"]
+transform = Transform3D(1, -4.34741e-06, -1.49012e-08, -1.49012e-07, 1, -4.47035e-08, -2.98023e-08, 1.11759e-07, 1, 2.14577e-06, 0.242758, -2.68221e-07)
+shape = SubResource("CylinderShape3D_qdb7t")
+debug_color = Color(7.70092e-07, 0.625131, 0.522924, 0.42)
+
+[node name="ring_base" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="9"]
+transform = Transform3D(-0.149578, -0.987835, 0.0425209, 0.958536, -0.134323, 0.251328, -0.242559, 0.0783509, 0.966968, 0.0870339, -0.00893098, 0.433675)
+bone_name = "Bone.020"
+bone_idx = 11
+
+[node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/ring_base" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/ring_base/Area3D" index="0"]
+transform = Transform3D(0.999999, 4.30271e-07, -4.47035e-08, 1.67638e-07, 1, 3.72529e-08, 2.5332e-07, -1.2666e-07, 1, 7.45058e-08, 0.195251, -5.96046e-08)
+shape = SubResource("CylinderShape3D_bk8y5")
+debug_color = Color(0.341237, 0.485749, 1, 0.42)
+
+[node name="ring_mid" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="10"]
+transform = Transform3D(-0.149578, -0.987835, 0.0425211, 0.958536, -0.134323, 0.251327, -0.242559, 0.078351, 0.966968, -0.396966, -0.0747439, 0.472063)
+bone_name = "Bone.021"
+bone_idx = 12
+
+[node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/ring_mid" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/ring_mid/Area3D" index="0"]
+transform = Transform3D(0.999998, 8.62405e-07, -5.96046e-08, 1.07847e-06, 0.999997, 2.98023e-08, -2.83122e-07, 1.86265e-07, 0.999999, -2.23517e-07, 0.33622, -8.9407e-08)
+shape = SubResource("CylinderShape3D_grjpy")
+debug_color = Color(0.948121, 0, 0.579837, 0.42)
+
+[node name="ring_tip" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="11"]
+transform = Transform3D(-0.149578, -0.987835, 0.042521, 0.958536, -0.134323, 0.251327, -0.242559, 0.078351, 0.966968, -1.00568, -0.157515, 0.520344)
+bone_name = "Bone.022"
+bone_idx = 13
+
+[node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/ring_tip" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/ring_tip/Area3D" index="0"]
+transform = Transform3D(1, 1.86265e-09, 0, 7.45058e-09, 1, 0, 0, 0, 1, -1.49012e-08, 0.246216, -5.96046e-08)
+shape = SubResource("CylinderShape3D_aygux")
+debug_color = Color(0, 0.625284, 0.521571, 0.42)
+
+[node name="little_base" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="12"]
+transform = Transform3D(-0.149578, -0.987835, 0.0425209, 0.958536, -0.134323, 0.251328, -0.242559, 0.0783509, 0.966967, 0.307959, -0.377127, 0.519659)
+bone_name = "Bone.023"
+bone_idx = 15
+
+[node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/little_base" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/little_base/Area3D" index="0"]
+transform = Transform3D(1, -3.72529e-09, 4.91738e-07, 1.6205e-07, 1, 1.85519e-06, -7.89762e-07, 1.49012e-08, 1, -1.19209e-07, 0.155121, -2.98023e-08)
+shape = SubResource("CylinderShape3D_gn5i3")
+debug_color = Color(0.235827, 0.507801, 1, 0.42)
+
+[node name="little_mid" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="13"]
+transform = Transform3D(-0.149577, -0.987835, 0.042521, 0.958536, -0.134323, 0.251328, -0.242559, 0.0783509, 0.966967, -0.0957794, -0.432027, 0.551682)
+bone_name = "Bone.024"
+bone_idx = 16
+
+[node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/little_mid" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/little_mid/Area3D" index="0"]
+transform = Transform3D(1, -7.76709e-07, 6.03488e-06, 7.76712e-07, 1, -4.02329e-07, -6.03488e-06, 4.02334e-07, 1, 5.96046e-08, 0.293811, -1.19209e-07)
+shape = SubResource("CylinderShape3D_3w0ci")
+debug_color = Color(0.950265, 2.40654e-06, 0.569452, 0.42)
+
+[node name="little_tip" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="14"]
+transform = Transform3D(-0.149578, -0.987835, 0.0425209, 0.958536, -0.134323, 0.251327, -0.242558, 0.0783509, 0.966968, -0.557036, -0.494747, 0.588266)
+bone_name = "Bone.025"
+bone_idx = 17
+
+[node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/little_tip" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/little_tip/Area3D" index="0"]
+transform = Transform3D(1, 1.19209e-07, -1.49012e-08, 4.47035e-08, 1, -4.47035e-08, 0, 1.2666e-07, 1, 0, 0.24659, -1.49012e-07)
+shape = SubResource("CylinderShape3D_pjc2j")
+debug_color = Color(4.71681e-06, 0.623616, 0.536124, 0.42)
+
+[node name="thumb_base" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="15"]
+transform = Transform3D(0.969972, -0.239471, 0.0425211, 0.221596, 0.942194, 0.251327, -0.100249, -0.234358, 0.966968, 0.807456, 1.10993, 0.111188)
+bone_name = "Bone.012"
+bone_idx = 19
+
+[node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/thumb_base" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/thumb_base/Area3D" index="0"]
+transform = Transform3D(1, 0, 7.45058e-08, -5.58794e-09, 1, -1.49012e-08, 0, 0, 1, 0, 0.296356, 1.49012e-07)
+shape = SubResource("CylinderShape3D_2jlu6")
+debug_color = Color(0.351184, 0.483098, 1, 0.42)
+
+[node name="thumb_tip" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="16"]
+transform = Transform3D(0.982383, -0.181975, 0.0425213, 0.165765, 0.953602, 0.251327, -0.0862837, -0.239851, 0.966968, 0.694834, 1.55304, 0.000970416)
+bone_name = "Bone.013"
+bone_idx = 20
+
+[node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/thumb_tip" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/thumb_tip/Area3D" index="0"]
+transform = Transform3D(1, -1.86265e-08, 1.34856e-06, 4.47035e-08, 0.999999, -7.45058e-08, -1.19209e-07, -6.85453e-07, 1, -0.00500268, 0.295784, 0.00302175)
+shape = SubResource("CylinderShape3D_hcehx")
+debug_color = Color(0.947044, 3.36915e-06, 0.584951, 0.42)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="17"]
+transform = Transform3D(-0.149578, -0.987835, 0.042521, 0.958536, -0.134323, 0.251327, -0.242559, 0.078351, 0.966968, 2.60347, 0.518866, 0.185837)
+bone_name = "Bone.001"
+bone_idx = 1
+
+[node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/BoneAttachment3D" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D/Area3D" index="0"]
+transform = Transform3D(0.918792, 0.122573, 0.37523, -0.380081, 0.0180424, 0.924777, 0.106583, -0.992294, 0.0631655, 0.148682, 1.71522, -0.101083)
+shape = SubResource("CylinderShape3D_bidn5")
+debug_color = Color(0.456388, 0.593444, 0.0865626, 0.42)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+unique_name_in_owner = true
+root_node = NodePath("%AnimationTree/..")
+tree_root = SubResource("AnimationNodeStateMachine_op06l")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationController" type="Node" parent="." index="3"]
+unique_name_in_owner = true
+script = ExtResource("6_fqbse")

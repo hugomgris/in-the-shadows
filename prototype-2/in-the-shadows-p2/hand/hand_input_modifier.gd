@@ -30,7 +30,7 @@ var current_bone_id := -1
 var hovered_bone_id := -1
 var last_mouse_pos: Vector2
 
-var draggable_bones = ["Bone.001", "Bone.007", "Bone.009", "Bone.012", "Bone.015", "Bone.018"]
+var draggable_bones = ["Bone.001", "Bone.012", "Bone.014", "Bone.017", "Bone.020", "Bone.023"]
 
 # Bone modification data
 var bone_modifications := {}

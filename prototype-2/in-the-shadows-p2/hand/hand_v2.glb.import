@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dayey43gflnbk"
-path="res://.godot/imported/hand_model.glb-a98ef35de5f7b5da50c533bb4725273b.scn"
+uid="uid://k33vj3vxlg1e"
+path="res://.godot/imported/hand_v2.glb-f3ba43a04541d7c32fd36b0d5ab02e76.scn"
 
 [deps]
 
-source_file="res://hand/hand_model.glb"
-dest_files=["res://.godot/imported/hand_model.glb-a98ef35de5f7b5da50c533bb4725273b.scn"]
+source_file="res://hand/hand_v2.glb"
+dest_files=["res://.godot/imported/hand_v2.glb-f3ba43a04541d7c32fd36b0d5ab02e76.scn"]
 
 [params]
 
@@ -34,7 +34,7 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "animations": {
-"Hand_Idle": {
+"idle": {
 "save_to_file/enabled": false,
 "save_to_file/keep_custom_tracks": "",
 "save_to_file/path": "",

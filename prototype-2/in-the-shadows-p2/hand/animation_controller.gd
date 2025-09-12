@@ -56,12 +56,12 @@ func _start_intro_now() -> void:
 		return
 
 	is_intro_playing = true
-	current_state = "intro_left"
+	current_state = "intro"
 	_pending_intro_start = false
 		
 	print("Starting intro animation...")
-	state_machine.start("intro_left")
-	animation_state_changed.emit("intro_left")
+	state_machine.start("intro")
+	animation_state_changed.emit("intro")
 	print("Intro animation started, signal emitted")
 
 func _process(delta):
@@ -77,7 +77,7 @@ func _process(delta):
 		print("State transition detected: ", current_state, " → ", current_node)
 		
 		# Handle intro finishing
-		if current_state == "intro_left" and current_node == "Hand_Idle":
+		if current_state == "intro" and current_node == "idle":
 			_on_intro_finished()
 		
 		# Update current state
@@ -92,10 +92,10 @@ func _on_intro_finished():
 	"""Handle intro completion"""
 	print("Intro animation finished")
 	is_intro_playing = false
-	current_state = "Hand_Idle"
+	current_state = "idle"
 
 	#Transition to idle
-	state_machine.travel("Hand_Idle")
+	state_machine.travel("idle")
 	intro_finished.emit()
 
 # Debug

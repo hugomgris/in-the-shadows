@@ -110,12 +110,12 @@ func setup_bone_attachments():
 func _on_bone_hovered(bone_id: int):
 	"""Called when HandInputModifier detects bone hover"""
 	# Could add visual feedback here if needed
-	pass
+	print("Hovering bone: " + get_bone_name(bone_id))
 
 func _on_bone_unhovered(bone_id: int):
 	"""Called when HandInputModifier detects bone unhover"""  
 	# Could add visual feedback here if needed
-	pass
+	print("Exiting bone: " + get_bone_name(bone_id))
 
 func _on_bone_area_mouse_entered(bone_id: int):
 	"""Handle bone area mouse enter events"""
