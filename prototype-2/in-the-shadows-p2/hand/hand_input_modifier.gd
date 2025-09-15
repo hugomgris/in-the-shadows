@@ -13,10 +13,56 @@ signal bone_unhovered(bone_id: int)
 @export var drag_sensitivity: float = 3.0      # Z-axis drag sensitivity
 
 # Rotation limits (degrees)
-@export var max_rotation_x: float = 90.0       # Max finger curl
-@export var min_rotation_x: float = -10.0      # Max finger extension
-@export var max_rotation_z: float = 30.0       # Max sideways bend
-@export var min_rotation_z: float = -30.0      # Max sideways bend
+@export var max_rotation_x: float = 95.0
+@export var min_rotation_x: float = 0.0
+@export var max_rotation_z_left: float = 0.0
+@export var min_rotation_z_left: float = -20.0
+@export var max_rotation_z_right: float = 20.0
+@export var min_rotation_z_right: float = 0.0
+
+# Finger data
+var finger_z_limits := {
+	"index": {"min": -25.0, "max": 0.0}, 
+	"middle": {"min": -15.0, "max": 0.0},
+	"ring": {"min": 0.0, "max": 15.0},
+	"pinky": {"min": 0.0, "max": 30.0},
+	"thumb": {"min": 0.0, "max": 70.0},
+	"palm": {"min": -20.0, "max": 20.0},
+}
+
+var bone_to_finger := {
+	"Bone.001": "palm",
+	"Bone.012": "thumb",
+	"Bone.014": "index",
+	"Bone.017": "middle",
+	"Bone.020": "ring",
+	"Bone.023": "pinky",
+}
+
+var finger_to_bone := {
+	"palm": "Bone.001",
+	"thumb": "Bone.012",
+	"index": "Bone.014",
+	"middle": "Bone.017",
+	"ring": "Bone.020",
+	"pinky": "Bone.023",
+}
+
+var bone_to_id := {
+	"Bone.001": 1,
+	"Bone.012": 19,
+	"Bone.014": 3,
+	"Bone.017": 7,
+	"Bone.020": 11,
+	"Bone.023": 15,
+}
+
+var finger_neighbours := {
+	"index": {"right": "middle"}, 
+	"middle": {"left": "index", "right": "ring"},
+	"ring": {"left": "middle", "right": "pinky"},
+	"pinky": {"left": "ring"}
+}
 
 # Input state
 var _input_enabled := false
@@ -225,12 +271,35 @@ func _handle_bone_drag(delta_mouse: Vector2):
 	# Only allow dragging for bones in the draggable_bones list
 	if bone_name in draggable_bones:
 		var mod = bone_modifications[current_bone_id]
+		#var finger_name = bone_to_finger[bone_name]
 		
 		var rotation_delta = delta_mouse.y * rotation_speed * 0.01
-		mod.target_rotation.z = clamp(mod.target_rotation.z + rotation_delta,
-			deg_to_rad(min_rotation_z), deg_to_rad(max_rotation_z))
+
+		_drag_bone(skeleton.get_bone_name(current_bone_id), mod, rotation_delta)
 		
 		mod.velocity_rotation.z *= 0.5
+
+func _drag_bone(bone_name: String, mod: BoneModification, rotation_delta: float):
+	var finger_name = bone_to_finger[bone_name]
+	var neighbors = finger_neighbours.get(finger_name, {})
+	
+	# Get base limits
+	var left_limit = deg_to_rad(finger_z_limits[finger_name]["min"])
+	var right_limit = deg_to_rad(finger_z_limits[finger_name]["max"])
+	
+	# Apply neighbor constraints
+	if neighbors.has("left"):
+		var left_bone = finger_to_bone[neighbors["left"]]
+		var neighbor_rotation = bone_modifications[bone_to_id[left_bone]].current_rotation.z
+		left_limit = max(left_limit, neighbor_rotation)
+	
+	if neighbors.has("right"):
+		var right_bone = finger_to_bone[neighbors["right"]]
+		var neighbor_rotation = bone_modifications[bone_to_id[right_bone]].current_rotation.z
+		right_limit = min(right_limit, neighbor_rotation)
+	
+	# Apply the constraint
+	mod.target_rotation.z = clamp(mod.target_rotation.z + rotation_delta, left_limit, right_limit)
 
 func set_bone_hovered(bone_id: int):
 	"""Set which bone is currently hovered"""
