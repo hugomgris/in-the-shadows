@@ -283,11 +283,9 @@ func _drag_bone(bone_name: String, mod: BoneModification, rotation_delta: float)
 	var finger_name = bone_to_finger[bone_name]
 	var neighbors = finger_neighbours.get(finger_name, {})
 	
-	# Get base limits
 	var left_limit = deg_to_rad(finger_z_limits[finger_name]["min"])
 	var right_limit = deg_to_rad(finger_z_limits[finger_name]["max"])
 	
-	# Apply neighbor constraints
 	if neighbors.has("left"):
 		var left_bone = finger_to_bone[neighbors["left"]]
 		var neighbor_rotation = bone_modifications[bone_to_id[left_bone]].current_rotation.z
@@ -298,7 +296,6 @@ func _drag_bone(bone_name: String, mod: BoneModification, rotation_delta: float)
 		var neighbor_rotation = bone_modifications[bone_to_id[right_bone]].current_rotation.z
 		right_limit = min(right_limit, neighbor_rotation)
 	
-	# Apply the constraint
 	mod.target_rotation.z = clamp(mod.target_rotation.z + rotation_delta, left_limit, right_limit)
 
 func set_bone_hovered(bone_id: int):
